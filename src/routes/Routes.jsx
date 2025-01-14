@@ -8,7 +8,7 @@ import SubscriptionPage from "../pages/UserPages/SubscriptionPage";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
-import DashboardLayout from "../layouts/DashboardLayout";
+// import DashboardLayout from "../layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {

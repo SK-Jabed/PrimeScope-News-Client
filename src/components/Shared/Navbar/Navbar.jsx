@@ -70,16 +70,16 @@ const Navbar = () => {
                     ) : (
                       <>
                         <Link
-                          to="/login"
+                          to="/authentication/login"
                           className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                         >
                           Login
                         </Link>
                         <Link
-                          to="/signup"
+                          to="/authentication/register"
                           className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
                         >
-                          Sign Up
+                          Register
                         </Link>
                       </>
                     )}
