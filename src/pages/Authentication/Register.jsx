@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from '../../hooks/useAuth';
 import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { imageUpload } from '../../api/utils';
 
 const Register = () => {
     const { createNewUser, updateUserProfile, signInWithGoogle, loading } =
@@ -17,15 +18,19 @@ const Register = () => {
       const name = form.name.value;
       const email = form.email.value;
       const password = form.password.value;
+        const image = form.image.files[0];
+
+        // 1. Send Image Data to ImageBB
+        const photoURL = await imageUpload(image);
 
       try {
-        //2. User Registration
+        // 2. User Registration
         const result = await createNewUser(email, password);
 
-        //3. Save username & profile photo
+        // 3. Save username & profile photo
         await updateUserProfile(
           name,
-          "https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c"
+          photoURL
         );
         console.log(result);
 
