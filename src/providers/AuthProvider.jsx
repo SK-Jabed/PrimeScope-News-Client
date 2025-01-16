@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import auth from "../config/firebase.config";
 import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -17,6 +18,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosPublic = useAxiosPublic();
 
   const createNewUser = (email, password) => {
     setLoading(true);
@@ -46,45 +48,48 @@ const AuthProvider = ({ children }) => {
   };
 
   // onAuthStateChange
-  //   useEffect(() => {
-  //     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-  //       console.log("CurrentUser-->", currentUser?.email);
-  //       if (currentUser?.email) {
-  //         setUser(currentUser);
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+        console.log("CurrentUser-->", currentUser?.email);
 
-  //         // Get JWT token
-  //         await axios.post(
-  //           `${import.meta.env.VITE_API_URL}/jwt`,
-  //           {
-  //             email: currentUser?.email,
-  //           },
-  //           { withCredentials: true }
-  //         );
-  //       } else {
-  //         setUser(currentUser);
-  //         await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
-  //           withCredentials: true,
-  //         });
-  //       }
-  //       setLoading(false);
-  //     });
-  //     return () => {
-  //       return unsubscribe();
-  //     };
-  //   }, []);
+        if (currentUser) {
+          // Get JWT token and Store on Local Storage
+          const userInfo = {email : currentUser?.email};
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser ? currentUser : null)
-        await axios.post(`${import.meta.env.VITE_API_URL}/users/${currentUser?.email}`, {
-            name: currentUser?.displayName,
-            email: currentUser?.email,
-            image: currentUser?.photoURL,
-        });
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
+          axiosPublic.post("/jwt", userInfo)
+          .then(res => {
+            if (res.data.token) {
+                localStorage.setItem("access-token", res.data.token);
+            }
+          })
+        } else {
+            // Remove the Token
+            localStorage.removeItem("access-token");
+        //   setUser(currentUser);
+        //   axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+        //     withCredentials: true,
+        //   });
+        }
+        setLoading(false);
+      });
+      return () => {
+        return unsubscribe();
+      };
+    }, []);
+
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+//       setUser(currentUser ? currentUser : null)
+//         await axios.post(`${import.meta.env.VITE_API_URL}/users/${currentUser?.email}`, {
+//             name: currentUser?.displayName,
+//             email: currentUser?.email,
+//             image: currentUser?.photoURL,
+//         });
+//       setLoading(false);
+//     });
+//     return () => unsubscribe();
+//   }, []);
 
   const authInfo = {
     user,
