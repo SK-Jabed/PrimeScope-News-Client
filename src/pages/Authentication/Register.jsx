@@ -6,14 +6,62 @@ import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { imageUpload } from "../../api/utils";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
   const { createNewUser, updateUserProfile, signInWithGoogle, loading } =
     useAuth();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+
+  const onSubmit = (data) => {
+    const imageFile = { image: data.image[0] };
+
+    // Send Image Data to ImageBB
+    const photoURL = imageUpload(imageFile);
+    console.log(data);
+
+    createNewUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user?.email;
+      console.log(loggedUser);
+
+      updateUserProfile(data.name, photoURL)
+        .then(() => {
+          // Create User Entity in The Database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("User Added to The Database");
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User Created Successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+          });
+
+          reset();
+        })
+        .catch((error) => console.log(error));
+    });
+  };
 
   // Form submit handler
-  const handleSubmit = async (event) => {
+  const handleSubmitForm = async (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
@@ -65,7 +113,7 @@ const Register = () => {
           <p className="text-sm text-gray-400">Welcome to PlantNet</p>
         </div>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onsubmit)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -76,13 +124,18 @@ const Register = () => {
                 Name
               </label>
               <input
+                required
                 type="text"
                 name="name"
                 id="name"
+                {...register("name", { required: true })}
                 placeholder="Enter Your Name Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
+              {errors.name && (
+                <span className="text-red-600">Name is required</span>
+              )}
             </div>
             <div>
               <label htmlFor="image" className="block mb-2 text-sm">
@@ -93,8 +146,12 @@ const Register = () => {
                 type="file"
                 id="image"
                 name="image"
+                {...register("image", { required: true })}
                 accept="image/*"
               />
+              {errors.image && (
+                <span className="text-red-600">Image is required</span>
+              )}
             </div>
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
@@ -104,11 +161,15 @@ const Register = () => {
                 type="email"
                 name="email"
                 id="email"
+                {...register("email", { required: true })}
                 required
                 placeholder="Enter Your Email Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
+              {errors.email && (
+                <span className="text-red-600">Email is required</span>
+              )}
             </div>
             <div>
               <div className="flex justify-between">
@@ -121,10 +182,33 @@ const Register = () => {
                 name="password"
                 autoComplete="new-password"
                 id="password"
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                  pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                })}
                 required
                 placeholder="*******"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
               />
+              {errors.password?.type === "required" && (
+                <p className="text-red-600">Password is required</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-600">Password must be 6 characters</p>
+              )}
+              {errors.password?.type === "maxLength" && (
+                <p className="text-red-600">
+                  Password must be less than 20 characters
+                </p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-600">
+                  Password must have one Uppercase, one lower case, one number
+                  and one special character.
+                </p>
+              )}
             </div>
           </div>
 
