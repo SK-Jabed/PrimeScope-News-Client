@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Button from "../../components/Shared/Buttons/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -5,7 +6,10 @@ const ErrorPage = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-white ">
+    <section className="bg-white">
+      <Helmet>
+        <title>PrimeScope News | ErrorPage</title>
+      </Helmet>
       <div className="container flex items-center min-h-screen px-6 py-12 mx-auto">
         <div className="flex flex-col items-center max-w-sm mx-auto text-center">
           <p className="p-3 text-sm font-medium text-lime-500 rounded-full bg-blue-50 ">
