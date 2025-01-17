@@ -8,6 +8,7 @@ import { imageUpload } from "../../api/utils";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createNewUser, updateUserProfile, signInWithGoogle, loading } =
