@@ -88,48 +88,46 @@ const Register = () => {
 
   // Handle Google Sign-in
 
-const handleGoogleSignIn = async () => {
-  setLoading(true);
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
 
-  try {
-    // Perform Google sign-in
-    const result = await signInWithGoogle();
-    const { displayName: name, email, photoURL } = result.user;
+    try {
+      // Perform Google sign-in
+      const result = await signInWithGoogle();
+      const { displayName: name, email, photoURL } = result.user;
 
-    // Prepare user data
-    const userInfo = {
-      name,
-      email,
-      image: photoURL,
-      role: "user", // Default role
-      timestamp: Date.now(),
-      premiumTaken: null,
-    };
+      // Prepare user data
+      const userInfo = {
+        name,
+        email,
+        image: photoURL,
+        role: "user", // Default role
+        timestamp: Date.now(),
+        premiumTaken: null,
+      };
 
-    // Save user data to the database
-    const dbResponse = await axiosPublic.post("/users", userInfo);
+      // Save user data to the database
+      const dbResponse = await axiosPublic.post("/users", userInfo);
 
-    if (dbResponse.data.insertedId) {
-      // New user added to the database
-      toast.success("Account created successfully. Welcome!");
-      navigate(from, { replace: true });
-    } else if (dbResponse.data.message === "User already exists") {
-      // User already exists in the database
-      toast.success("Welcome back! You are already registered.");
-      navigate("/");
-    } else {
-      // Handle unexpected cases
-      toast.error("Something went wrong. Please try again.");
+      if (dbResponse.data.insertedId) {
+        // New user added to the database
+        toast.success("Account created successfully. Welcome!");
+        navigate(from, { replace: true });
+      } else if (dbResponse.data.message === "User already exists") {
+        // User already exists in the database
+        toast.success("Welcome back! You are already registered.");
+        navigate("/");
+      } else {
+        // Handle unexpected cases
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Google Sign-in Error:", err);
+      toast.error("Google Sign-in failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("Google Sign-in Error:", err);
-    toast.error("Google Sign-in failed. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
-
-
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">
