@@ -6,11 +6,14 @@ import { TbFidgetSpinner } from "react-icons/tb";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const { loginUser, signInWithGoogle, loading, user } = useAuth();
+  const { loginUser, signInWithGoogle, loading, user, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosPublic = useAxiosPublic();
   const from = location?.state?.from?.pathname || "/";
 
   if (user) return <Navigate to={from} replace={true} />;
@@ -36,17 +39,59 @@ const Login = () => {
   };
 
   // Handle Google Signin
-  const handleGoogleSignIn = async () => {
-    try {
-      //User Registration using google
-      await signInWithGoogle();
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     //User Registration using google
+  //     await signInWithGoogle();
+  //     navigate(from, { replace: true });
+  //     toast.success("Login Successful");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err?.message);
+  //   }
+  // };
+
+const handleGoogleSignIn = async () => {
+  setLoading(true);
+
+  try {
+    // Perform Google sign-in
+    const result = await signInWithGoogle();
+    const { displayName: name, email, photoURL } = result.user;
+
+    // Prepare user data
+    const userInfo = {
+      name,
+      email,
+      image: photoURL,
+      role: "user", // Default role
+      timestamp: Date.now(),
+      premiumTaken: null,
+    };
+
+    // Save user data to the database
+    const dbResponse = await axiosPublic.post("/users", userInfo);
+
+    if (dbResponse.data.insertedId) {
+      // New user added to the database
+      toast.success("You are logged in successfully. Welcome!");
       navigate(from, { replace: true });
-      toast.success("Login Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
+    } else if (dbResponse.data.message === "User already exists") {
+      // User already exists in the database
+      toast.success("Welcome back! You are already logged in.");
+      navigate(from, { replace: true });
+    } else {
+      // Handle unexpected cases
+      toast.error("Something went wrong. Please try again.");
     }
-  };
+  } catch (err) {
+    console.error("Google Sign-in Error:", err);
+    toast.error("Google Sign-in failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">
