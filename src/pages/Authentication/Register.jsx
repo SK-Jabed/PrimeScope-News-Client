@@ -29,65 +29,79 @@ const Register = () => {
     const photoURL = imageUpload(imageFile);
     console.log(data);
 
-    createNewUser(data.email, data.password).then((result) => {
-      const loggedUser = result.user?.email;
+    createNewUser(data.email, photoURL).then((result) => {
+      const loggedUser = result.user;
       console.log(loggedUser);
-
-      updateUserProfile(data.name, photoURL)
+      updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          // Create User Entity in The Database
-          const userInfo = {
-            name: data.name,
-            email: data.email,
-          };
-
-          axiosPublic.post("/users", userInfo).then((res) => {
-            if (res.data.insertedId) {
-              console.log("User Added to The Database");
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "User Created Successfully.",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              navigate("/");
-            }
-          });
-
+          console.log("user profile info updated");
           reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User created successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+
+        // updateUserProfile(data.name, photoURL)
+        //   .then(() => {
+        //     // Create User Entity in The Database
+        //     const userInfo = {
+        //       name: data.name,
+        //       email: data.email,
+        //     };
+
+        //     axiosPublic.post("/users", userInfo).then((res) => {
+        //       if (res.data.insertedId) {
+        //         console.log("User Added to The Database");
+        //         Swal.fire({
+        //           position: "center",
+        //           icon: "success",
+        //           title: "User Created Successfully.",
+        //           showConfirmButton: false,
+        //           timer: 1500,
+        //         });
+        //         navigate("/");
+        //       }
+        //     });
+
+        //     reset();
+        //   })
+        // .catch((error) => console.log(error));
     });
   };
 
   // Form submit handler
-  const handleSubmitForm = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    const image = form.image.files[0];
+  // const handleSubmitForm = async (event) => {
+  //   event.preventDefault();
+  //   const form = event.target;
+  //   const name = form.name.value;
+  //   const email = form.email.value;
+  //   const password = form.password.value;
+  //   const image = form.image.files[0];
 
-    // 1. Send Image Data to ImageBB
-    const photoURL = await imageUpload(image);
+  //   // 1. Send Image Data to ImageBB
+  //   const photoURL = await imageUpload(image);
 
-    try {
-      // 2. User Registration
-      const result = await createNewUser(email, password);
+  //   try {
+  //     // 2. User Registration
+  //     const result = await createNewUser(email, password);
 
-      // 3. Save username & profile photo
-      await updateUserProfile(name, photoURL);
-      console.log(result);
+  //     // 3. Save username & profile photo
+  //     await updateUserProfile(name, photoURL);
+  //     console.log(result);
 
-      navigate("/");
-      toast.success("Signup Successful");
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
-    }
-  };
+  //     navigate("/");
+  //     toast.success("Signup Successful");
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err?.message);
+  //   }
+  // };
 
   // Handle Google Signin
   const handleGoogleSignIn = async () => {
@@ -114,7 +128,7 @@ const Register = () => {
           <p className="text-sm text-gray-400">Welcome to PlantNet</p>
         </div>
         <form
-          onSubmit={handleSubmit(onsubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
