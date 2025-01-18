@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -59,7 +60,7 @@ const AllUsers = () => {
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn btn-lg bg-orange-500"
+                      className="btn btn-lg bg-orange-600"
                     >
                       <FaUsers className="text-white text-2xl"></FaUsers>
                     </button>
