@@ -14,7 +14,7 @@ const AddArticleForm = ({ onSubmit }) => {
   };
 
   const publisherOptions = publishers?.map((publisher) => ({
-    value: [ publisher.name, publisher.logo],
+    value: { publisherName: publisher.name, publisherLogo: publisher.logo },
     label: publisher.name,
   }));
 

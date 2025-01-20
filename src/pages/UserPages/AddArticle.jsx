@@ -12,11 +12,15 @@ const AddArticle = () => {
     try {
       const response = await axiosSecure.post("/articles", {
         ...data,
-        authorName: user?.displayName,
-        authorEmail: user?.email,
-        authorPhoto: user?.photoURL,
-        status: "pending", // Default status for admin approval
+        author: {
+          name: user?.displayName || "Anonymous",
+          email: user?.email || "unknown@example.com",
+          photo: user?.photoURL || "https://i.ibb.co/placeholder-photo.jpg",
+        },
         postedDate: new Date().toISOString(),
+        status: "pending", // Default status (pending, approved, declined)
+        declineReason: null, // Initially null
+        isPremium: false, // Initially not premium
       });
 
       if (response.data.insertedId) {
