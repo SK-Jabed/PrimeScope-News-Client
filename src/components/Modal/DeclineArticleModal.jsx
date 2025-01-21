@@ -70,7 +70,7 @@ const DeclineArticleModal = ({ articleId, onClose, refetch }) => {
   };
 
   return (
-    <Modal isOpen={true} backdrop="opaque" onClose={onClose}>
+    <Modal isOpen={true} onClose={onClose}>
       <ModalContent>
         <ModalHeader className="text-lg font-semibold">
           Decline Article

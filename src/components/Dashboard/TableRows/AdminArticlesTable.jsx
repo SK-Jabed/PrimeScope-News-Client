@@ -1,5 +1,7 @@
 // import { axiosSecure } from "../../../hooks/useAxiosSecure";
 
+
+
 // const AdminArticlesTable = ({ articles, refetch, onOpenDeclineModal }) => {
 //   const handleApprove = async (id) => {
 //     // Call API to approve the article
@@ -75,9 +77,29 @@
 // export default AdminArticlesTable;
 
 
-
+import { axiosSecure } from "../../../hooks/useAxiosSecure";
 
 const AdminArticlesTable = ({ articles, refetch, onOpenDeclineModal }) => {
+    const handleApprove = async (id) => {
+      // Call API to approve the article
+      // await axiosSecure.put(`/articles/${id}/approve`);
+      await axiosSecure.patch(`/articles/approve/${id}`);
+      refetch();
+    };
+
+    const handleDelete = async (id) => {
+      // Call API to delete the article
+      await axiosSecure.delete(`/articles/${id}`);
+      refetch();
+    };
+
+    const handleMakePremium = async (id) => {
+      // Call API to make the article premium
+      // await axiosSecure.put(`/articles/${id}/make-premium`);
+      await axiosSecure.patch(`/articles/premium/${id}`);
+      refetch();
+    };
+
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border rounded-lg">
