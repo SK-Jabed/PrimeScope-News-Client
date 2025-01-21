@@ -76,7 +76,6 @@
 
 
 import React, { useState } from "react";
-// import AdminArticlesTable from "./AdminArticlesTable";
 import AdminArticlesTable from "../../../components/Dashboard/TableRows/AdminArticlesTable";
 import Pagination from "../../../modules/Pagination";
 import useArticlesAdmin from "../../../hooks/useArticlesAdmin";
