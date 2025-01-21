@@ -13,8 +13,8 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AddPublisher from "../pages/Dashboard/AdminPages/AddPublisher";
 import ManageUsers from "../pages/Dashboard/AdminPages/ManageUsers";
 import ProfilePage from "../pages/UserPages/ProfilePage";
-import ManageArticles from "../pages/Dashboard/AdminPages/ManageArticles";
 import Statistics from "../pages/Dashboard/Common/Statistics";
+import AdminArticles from "../pages/Dashboard/AdminPages/AdminArticles";
 
 export const router = createBrowserRouter([
   {
@@ -110,7 +110,7 @@ export const router = createBrowserRouter([
         path: "allArticles",
         element: (
           <PrivateRoute>
-            <ManageArticles />
+            <AdminArticles />
           </PrivateRoute>
         ),
       },
