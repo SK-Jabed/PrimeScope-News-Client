@@ -15,6 +15,7 @@ import ManageUsers from "../pages/Dashboard/AdminPages/ManageUsers";
 import ProfilePage from "../pages/UserPages/ProfilePage";
 import Statistics from "../pages/Dashboard/Common/Statistics";
 import AdminArticles from "../pages/Dashboard/AdminPages/AdminArticles";
+import PremiumArticles from "../pages/UserPages/PremiumArticles";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SubscriptionPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "premiumArticles",
+        element: (
+          <PrivateRoute>
+            <PremiumArticles />
           </PrivateRoute>
         ),
       },
