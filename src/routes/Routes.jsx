@@ -17,6 +17,8 @@ import Statistics from "../pages/Dashboard/Common/Statistics";
 import AdminArticles from "../pages/Dashboard/AdminPages/AdminArticles";
 import PremiumArticles from "../pages/UserPages/PremiumArticles";
 import MyArticlesPage from "../pages/UserPages/MyArticles";
+import UpdateArticle from "../pages/UserPages/UpdateArticle";
+import ArticleDetails from "../pages/UserPages/ArticleDetails";
 
 export const router = createBrowserRouter([
   {
@@ -45,10 +47,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "updateArticle/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateArticle />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "myArticles",
         element: (
           <PrivateRoute>
             <MyArticlesPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "articleDetails/:id",
+        element: (
+          <PrivateRoute>
+            <ArticleDetails />
           </PrivateRoute>
         ),
       },

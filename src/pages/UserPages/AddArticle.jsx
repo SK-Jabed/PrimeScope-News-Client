@@ -21,6 +21,7 @@ const AddArticle = () => {
         status: "pending", // Default status (pending, approved, declined)
         declineReason: null, // Initially null
         isPremium: false, // Initially not premium
+        views: 0, // Track views
       });
 
       if (response.data.insertedId) {
