@@ -9,7 +9,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../config/firebase.config";
-import axios from "axios";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);

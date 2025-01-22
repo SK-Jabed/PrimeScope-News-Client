@@ -12,10 +12,11 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddPublisher from "../pages/Dashboard/AdminPages/AddPublisher";
 import ManageUsers from "../pages/Dashboard/AdminPages/ManageUsers";
-import ProfilePage from "../pages/UserPages/ProfilePage";
+import ProfilePage from "../pages/Dashboard/Common/ProfilePage";
 import Statistics from "../pages/Dashboard/Common/Statistics";
 import AdminArticles from "../pages/Dashboard/AdminPages/AdminArticles";
 import PremiumArticles from "../pages/UserPages/PremiumArticles";
+import MyArticlesPage from "../pages/UserPages/MyArticles";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SubscriptionPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myArticles",
+        element: (
+          <PrivateRoute>
+            <MyArticlesPage />
           </PrivateRoute>
         ),
       },
