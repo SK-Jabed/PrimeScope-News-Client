@@ -23,7 +23,6 @@
 // export default Pagination;
 
 
-
 import React from "react";
 
 const Pagination = ({ total, currentPage, onPageChange, limit }) => {
