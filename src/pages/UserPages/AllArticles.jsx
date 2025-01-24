@@ -164,6 +164,7 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const publishers = [
   "Jugantor",
@@ -183,6 +184,7 @@ const AllArticlesPage = () => {
   const [selectedPublisher, setSelectedPublisher] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const limit = 6; // Articles per page
 
@@ -296,9 +298,7 @@ const AllArticlesPage = () => {
               </p>
               <button
                 disabled={article.isPremium}
-                onClick={() =>
-                  (window.location.href = `/article/${article._id}`)
-                }
+                onClick={() => navigate(`/articleDetails/${article._id}`)}
                 className={`w-full px-4 py-2 rounded-lg ${
                   article.isPremium
                     ? "bg-gray-400 text-gray-700 cursor-not-allowed"

@@ -13,7 +13,7 @@ import { HeroUIProvider } from "@heroui/react";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <AuthProvider>
       <HeroUIProvider>
         <HelmetProvider>
@@ -24,5 +24,5 @@ createRoot(document.getElementById("root")).render(
         </HelmetProvider>
       </HeroUIProvider>
     </AuthProvider>
-  </StrictMode>
+  // </StrictMode>
 );

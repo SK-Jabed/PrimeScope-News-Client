@@ -14,12 +14,14 @@
 
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 
 const PremiumArticles = () => {
   const [premiumArticles, setPremiumArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const axiosSecure = useAxiosSecure(); // Your existing axiosSecure instance
+  const navigate = useNavigate();
 
   // Fetch premium articles from the server
   const fetchPremiumArticles = async () => {
@@ -70,9 +72,7 @@ const PremiumArticles = () => {
                 {article.description.slice(0, 100)}...
               </p>
               <button
-                onClick={() =>
-                  (window.location.href = `/article/${article._id}`)
-                }
+                onClick={() => navigate(`/articleDetails/${article._id}`)}
                 className="w-full px-4 py-2 rounded-lg bg-indigo-500 text-white hover:bg-indigo-600"
               >
                 Read More

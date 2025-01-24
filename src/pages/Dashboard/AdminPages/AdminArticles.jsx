@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import AdminArticlesTable from "../../../components/Dashboard/TableRows/AdminArticlesTable";
-import Pagination from "../../../modules/Pagination";
+// import Pagination from "../../../modules/Pagination";
 import useArticlesAdmin from "../../../hooks/useArticlesAdmin";
 import DeclineArticleModal from "../../../components/Modal/DeclineArticleModal";
 
 const AdminArticles = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const [declineArticleId, setDeclineArticleId] = useState(null);
-  const limit = 6; // Number of articles per page
-  const { articles, total, refetch } = useArticlesAdmin(currentPage, limit);
+  // const limit = 6; // Number of articles per page
+  const { articles, refetch } = useArticlesAdmin();
 
   const handleOpenDeclineModal = (id) => {
     setDeclineArticleId(id);
@@ -26,12 +26,12 @@ const AdminArticles = () => {
         refetch={refetch}
         onOpenDeclineModal={handleOpenDeclineModal}
       />
-      <Pagination
+      {/* <Pagination
         total={total}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
         limit={limit}
-      />
+      /> */}
       {declineArticleId && (
         <DeclineArticleModal
           articleId={declineArticleId}

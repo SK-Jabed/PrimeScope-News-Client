@@ -5,7 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const ArticleDetails = () => {
-    const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams(); // Get article ID from URL
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,9 +30,7 @@ const ArticleDetails = () => {
   }, [id]);
 
   if (loading) {
-    return (
-     <LoadingSpinner />
-    );
+    return <LoadingSpinner />;
   }
 
   if (!article) {
