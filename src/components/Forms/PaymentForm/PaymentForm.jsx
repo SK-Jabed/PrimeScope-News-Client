@@ -11,12 +11,12 @@ import Swal from "sweetalert2";
 const PaymentForm = ({ plan }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
-  const { user } = useAuth();
+  const [error, setError] = useState("");
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const subscriptionPrice = plan?.price;
 
@@ -139,7 +139,7 @@ const PaymentForm = ({ plan }) => {
       <select className="mb-4 w-full border p-2 rounded">
         <option>{plan.title}</option>
       </select>
-      <p className="text-red-600 mb-3">{error}</p>
+      <p className="text-red-600 mb-2">{error}</p>
       {transactionId && (
         <p className="text-green-600 mb-3">
           {" "}
