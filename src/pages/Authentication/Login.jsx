@@ -54,6 +54,7 @@ const Login = () => {
         role: "user", // Default role
         timestamp: Date.now(),
         premiumTaken: null,
+        isPremium: false,
       };
 
       // Save user data to the database

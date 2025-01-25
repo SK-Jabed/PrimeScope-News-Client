@@ -60,6 +60,7 @@ const Register = () => {
           role: "user",
           timestamp: Date.now(),
           premiumTaken: null,
+          isPremium: false,
         };
 
         const dbResponse = await axiosPublic.post("/users", userInfo);
@@ -104,6 +105,7 @@ const Register = () => {
         role: "user", // Default role
         timestamp: Date.now(),
         premiumTaken: null,
+        isPremium: false,
       };
 
       // Save user data to the database
