@@ -76,32 +76,44 @@ const PaymentForm = ({ plan }) => {
     } else {
       console.log("Payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        console.log("Transaction id", paymentIntent.id);
-        setTransactionId(paymentIntent.id);
-      }
+        const subscriptionPeriod =
+          plan.title === "1 Minute Plan"
+            ? 1 / 1440 // 1 minute in days
+            : plan.title === "5-Day Plan"
+            ? 5
+            : 10; // Customize periods based on plans
 
-      // Now Save The Payment Information in The Database
-      const subscriptionData = {
-        email: user?.email,
-        name: user?.displayName,
-        price: subscriptionPrice,
-        transactionId: paymentIntent.id,
-        date: new Date(), // utc date convert. use moment js to
-      };
+        const premiumExpirationDate = new Date(
+          Date.now() + subscriptionPeriod * 24 * 60 * 60 * 1000
+        ); // Add days to current time
 
-      const res = await axiosSecure.post("/subscriptions", subscriptionData);
-
-      console.log("Payment saved", res.data);
-
-      if (res.data?.insertedId) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Thank you for taking subscription",
-          showConfirmButton: false,
-          timer: 1500,
+        // Update the user document with the premium expiration date
+        await axiosSecure.patch(`/users/${user.email}`, {
+          premiumTaken: premiumExpirationDate,
         });
-        navigate("/subscription");
+
+        console.log("Updated premium expiration date:", premiumExpirationDate);
+
+        // Save subscription data
+        const subscriptionData = {
+          email: user?.email,
+          name: user?.displayName,
+          price: subscriptionPrice,
+          transactionId: paymentIntent.id,
+          date: new Date(),
+        };
+
+        const res = await axiosSecure.post("/subscriptions", subscriptionData);
+        if (res.data?.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Thank you for taking a subscription",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/subscription");
+        }
       }
     }
   };
@@ -129,7 +141,10 @@ const PaymentForm = ({ plan }) => {
       </select>
       <p className="text-red-600 mb-3">{error}</p>
       {transactionId && (
-        <p className="text-green-600 mb-3"> Your transaction id: {transactionId}</p>
+        <p className="text-green-600 mb-3">
+          {" "}
+          Your transaction id: {transactionId}
+        </p>
       )}
       <Button
         type="submit"
