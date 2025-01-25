@@ -81,7 +81,7 @@ const PaymentForm = ({ plan }) => {
       }
 
       // Now Save The Payment Information in The Database
-      const paymentData = {
+      const subscriptionData = {
         email: user?.email,
         name: user?.displayName,
         price: subscriptionPrice,
@@ -89,15 +89,15 @@ const PaymentForm = ({ plan }) => {
         date: new Date(), // utc date convert. use moment js to
       };
 
-      const res = await axiosSecure.post("/payments", paymentData);
+      const res = await axiosSecure.post("/subscriptions", subscriptionData);
 
       console.log("Payment saved", res.data);
 
-      if (res.data?.paymentResult?.insertedId) {
+      if (res.data?.insertedId) {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Thank you for the taka paisa",
+          title: "Thank you for taking subscription",
           showConfirmButton: false,
           timer: 1500,
         });
