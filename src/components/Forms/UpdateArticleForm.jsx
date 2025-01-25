@@ -11,10 +11,21 @@ const UpdateArticleForm = ({ onSubmit, defaultValues = {} }) => {
   const { publishers, isLoading } = usePublishers();
 
   // Handle image upload
-  const handleImageUpload = async (file) => {
+//   const handleImageUpload = async (file) => {
+//     const imageUrl = await imageUpload(file);
+//     setValue("image", imageUrl);
+//   };
+
+const handleImageUpload = async (file) => {
+  try {
     const imageUrl = await imageUpload(file);
+    console.log("Uploaded Image URL:", imageUrl); // Debug
     setValue("image", imageUrl);
-  };
+  } catch (error) {
+    console.error("Image upload failed:", error);
+  }
+};
+
 
   const publisherOptions = publishers?.map((publisher) => ({
     value: { publisherName: publisher.name, publisherLogo: publisher.logo },
@@ -63,19 +74,51 @@ const UpdateArticleForm = ({ onSubmit, defaultValues = {} }) => {
       {/* Publisher */}
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Publisher</label>
-        <Select
+        {/* <Select
           options={publisherOptions}
           isLoading={isLoading}
           defaultValue={publisherOptions?.find(
             (option) => option.label === defaultValues.publisher?.publisherName
           )}
           onChange={(selected) => setValue("publisher", selected.value)}
+        /> */}
+        <Select
+          options={publisherOptions}
+          isLoading={isLoading}
+          defaultValue={publisherOptions?.find(
+            (option) => option.label === defaultValues.publisher?.publisherName
+          )}
+          onChange={(selected) =>
+            setValue("publisher", {
+              publisherName: selected.value.publisherName,
+              publisherLogo: selected.value.publisherLogo,
+            })
+          }
         />
       </div>
 
       {/* Tags */}
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Tags</label>
+        {/* <Select
+          isMulti
+          options={[
+            { value: "Technology", label: "Technology" },
+            { value: "Health", label: "Health" },
+            { value: "Science", label: "Science" },
+          ]}
+          defaultValue={defaultValues.tags?.map((tag) => ({
+            value: tag,
+            label: tag,
+          }))}
+          onChange={(selected) =>
+            setValue(
+              "tags",
+              selected.map((option) => option.value)
+            )
+          }
+        /> */}
+
         <Select
           isMulti
           options={[
