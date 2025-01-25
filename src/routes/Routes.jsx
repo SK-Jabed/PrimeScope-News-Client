@@ -19,6 +19,7 @@ import PremiumArticles from "../pages/UserPages/PremiumArticles";
 import MyArticlesPage from "../pages/UserPages/MyArticles";
 import UpdateArticle from "../pages/UserPages/UpdateArticle";
 import ArticleDetails from "../pages/UserPages/ArticleDetails";
+import PaymentPage from "../modules/PaymentPage";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SubscriptionPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivateRoute>
+            <PaymentPage />
           </PrivateRoute>
         ),
       },
