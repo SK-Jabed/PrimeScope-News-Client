@@ -31,92 +31,223 @@ const PaymentForm = ({ plan }) => {
     }
   }, [axiosSecure, subscriptionPrice]);
 
-  const handleSubmit = async (event) => {
-    // Block native form submission.
-    event.preventDefault();
+//   const handleSubmit = async (event) => {
+//     // Block native form submission.
+//     event.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
+    // if (!stripe || !elements) {
+    //   return;
+    // }
 
-    const card = elements.getElement(CardElement);
+    // const card = elements.getElement(CardElement);
 
-    if (card == null) {
-      return;
-    }
+    // if (card == null) {
+    //   return;
+    // }
 
-    // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card,
-    });
+    // // Use your card Element with other Stripe.js APIs
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: "card",
+    //   card,
+    // });
 
-    if (error) {
-      console.log("Payment error", error);
-      setError(error.message);
-    } else {
-      console.log("Payment successful", paymentMethod);
-      setError("");
-    }
+    // if (error) {
+    //   console.log("Payment error", error);
+    //   setError(error.message);
+    // } else {
+    //   console.log("Payment successful", paymentMethod);
+    //   setError("");
+    // }
 
-    // Confirm Payment
-    const { paymentIntent, error: confirmError } =
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: card,
-          billing_details: {
-            email: user?.email || "anonymous",
-            name: user?.displayName || "anonymous",
+    // // Confirm Payment
+    // const { paymentIntent, error: confirmError } =
+    //   await stripe.confirmCardPayment(clientSecret, {
+    //     payment_method: {
+    //       card: card,
+    //       billing_details: {
+    //         email: user?.email || "anonymous",
+    //         name: user?.displayName || "anonymous",
+    //       },
+    //     },
+    //   });
+
+//     if (confirmError) {
+//       console.log("Confirm error");
+//     } else {
+//       console.log("Payment intent", paymentIntent);
+//       if (paymentIntent.status === "succeeded") {
+//         const subscriptionPeriod =
+//           plan.title === "1 Minute Plan"
+//             ? 1 / 1440 // 1 minute in days
+//             : plan.title === "5-Day Plan"
+//             ? 5
+//             : 10; // Customize periods based on plans
+
+//         const premiumExpirationDate = new Date(
+//           Date.now() + subscriptionPeriod * 24 * 60 * 60 * 1000
+//         ); // Add days to current time
+
+//         // Update the user document with the premium expiration date
+//         await axiosSecure.patch(`/users/${user.email}`, {
+//           premiumTaken: premiumExpirationDate,
+//           isPremium: true,
+//         });
+
+//         console.log("Updated premium expiration date:", premiumExpirationDate);
+
+//         // Save subscription data
+//         const subscriptionData = {
+//           email: user?.email,
+//           name: user?.displayName,
+//           price: subscriptionPrice,
+//           transactionId: paymentIntent.id,
+//           date: new Date(),
+//         };
+
+//         const res = await axiosSecure.post("/subscriptions", subscriptionData);
+//         if (res.data?.insertedId) {
+//           Swal.fire({
+//             position: "center",
+//             icon: "success",
+//             title: "Thank you for taking a subscription",
+//             showConfirmButton: false,
+//             timer: 1500,
+//           });
+//           navigate("/subscription");
+//         }
+//       }
+//     }
+//   };
+
+    // const handleSubmit = async (event) => {
+    //   event.preventDefault();
+
+    //   if (!stripe || !elements) {
+    //     return;
+    //   }
+
+    //   const card = elements.getElement(CardElement);
+
+    //   if (card == null) {
+    //     return;
+    //   }
+
+    //   // Use your card Element with other Stripe.js APIs
+    //   const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //     type: "card",
+    //     card,
+    //   });
+
+    //   if (error) {
+    //     console.log("Payment error", error);
+    //     setError(error.message);
+    //   } else {
+    //     console.log("Payment successful", paymentMethod);
+    //     setError("");
+    //   }
+
+    //   // Confirm Payment
+    //   const { paymentIntent, error: confirmError } =
+    //     await stripe.confirmCardPayment(clientSecret, {
+    //       payment_method: {
+    //         card: card,
+    //         billing_details: {
+    //           email: user?.email || "anonymous",
+    //           name: user?.displayName || "anonymous",
+    //         },
+    //       },
+    //     });
+
+    //   if (paymentIntent?.status === "succeeded") {
+    //     const premiumTaken = new Date().toISOString();
+    //     const premiumPeriodDays =
+    //       plan.title === "1 Minute Plan"
+    //         ? 1 / 1440 // 1 minute in days
+    //         : plan.title === "5-Day Plan"
+    //         ? 5
+    //         : 10;
+
+    //     await axiosSecure.patch(`/users/${user.email}`, {
+    //       premiumTaken,
+    //       isPremium: true,
+    //       premiumPeriodDays,
+    //     });
+
+    //     // Save subscription data
+    //     const subscriptionData = {
+    //       email: user?.email,
+    //       name: user?.displayName,
+    //       price: subscriptionPrice,
+    //       transactionId: paymentIntent.id,
+    //       date: new Date(),
+    //     };
+
+    //     const res = await axiosSecure.post("/subscriptions", subscriptionData);
+    //     if (res.data?.insertedId) {
+    //       Swal.fire({
+    //         position: "center",
+    //         icon: "success",
+    //         title: "Thank you for taking a subscription",
+    //         showConfirmButton: false,
+    //         timer: 1500,
+    //       });
+    //       navigate("/subscription");
+    //     }
+    //   } else if (confirmError) {
+    //     console.error("Payment failed:", error.message);
+    //     setError(error.message);
+    //   }
+    // };
+
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+
+      if (!stripe || !elements) return;
+
+      const card = elements.getElement(CardElement);
+      const { error, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card,
+            billing_details: {
+              email: user?.email || "anonymous",
+              name: user?.displayName || "anonymous",
+            },
           },
-        },
-      });
+        }
+      );
 
-    if (confirmError) {
-      console.log("Confirm error");
-    } else {
-      console.log("Payment intent", paymentIntent);
-      if (paymentIntent.status === "succeeded") {
-        const subscriptionPeriod =
+      if (paymentIntent?.status === "succeeded") {
+        const premiumTaken = new Date().toISOString();
+        const premiumPeriodDays =
           plan.title === "1 Minute Plan"
             ? 1 / 1440 // 1 minute in days
             : plan.title === "5-Day Plan"
             ? 5
-            : 10; // Customize periods based on plans
+            : 10;
 
-        const premiumExpirationDate = new Date(
-          Date.now() + subscriptionPeriod * 24 * 60 * 60 * 1000
-        ); // Add days to current time
-
-        // Update the user document with the premium expiration date
         await axiosSecure.patch(`/users/${user.email}`, {
-          premiumTaken: premiumExpirationDate,
+          premiumTaken,
+          isPremium: true,
+          premiumPeriodDays,
         });
 
-        console.log("Updated premium expiration date:", premiumExpirationDate);
-
-        // Save subscription data
-        const subscriptionData = {
-          email: user?.email,
-          name: user?.displayName,
-          price: subscriptionPrice,
-          transactionId: paymentIntent.id,
-          date: new Date(),
-        };
-
-        const res = await axiosSecure.post("/subscriptions", subscriptionData);
-        if (res.data?.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Thank you for taking a subscription",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/subscription");
-        }
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Thank you for subscribing!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/subscription");
+      } else if (error) {
+        console.error("Payment failed:", error.message);
+        setError(error.message);
       }
-    }
-  };
+    };
+
 
   return (
     <form onSubmit={handleSubmit}>

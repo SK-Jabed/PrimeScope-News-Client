@@ -55,6 +55,7 @@ const Login = () => {
         timestamp: Date.now(),
         premiumTaken: null,
         isPremium: false,
+        premiumExpiration: null,
       };
 
       // Save user data to the database

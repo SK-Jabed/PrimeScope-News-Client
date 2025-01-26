@@ -61,6 +61,7 @@ const Register = () => {
           timestamp: Date.now(),
           premiumTaken: null,
           isPremium: false,
+          premiumExpiration: null,
         };
 
         const dbResponse = await axiosPublic.post("/users", userInfo);
@@ -106,6 +107,7 @@ const Register = () => {
         timestamp: Date.now(),
         premiumTaken: null,
         isPremium: false,
+        premiumExpiration: null,
       };
 
       // Save user data to the database
