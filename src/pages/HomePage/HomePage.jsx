@@ -3,6 +3,9 @@ import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@heroui/react";
+import TrendingArticles from "./TrendingArticles/TrendingArticles";
+import AllPublisher from "./AllPublisher";
+import StatisticsSection from "./StatisticsSection";
 
 const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // State for showing modal
@@ -34,6 +37,12 @@ const Homepage = () => {
       <p className="text-gray-600 text-center mt-2">
         Enjoy browsing our content!
       </p>
+
+      <TrendingArticles></TrendingArticles>
+
+      <AllPublisher></AllPublisher>
+
+<StatisticsSection></StatisticsSection>
 
       {/* Headless UI Modal */}
       <Dialog
