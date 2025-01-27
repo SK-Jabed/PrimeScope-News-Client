@@ -9,33 +9,15 @@ const PaymentPage = () => {
 
   // Add publishable key
   const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
-
+  
+  if (!plan) return <div>Loading...</div>;
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 shadow-lg rounded-lg max-w-md w-full">
         <h2 className="text-xl font-bold text-center">Your Card Information</h2>
         <p className="text-center mt-2">Plan: {plan.title}</p>
-        {/* <form>
-          <input
-            type="text"
-            className="mt-4 w-full border p-2 rounded"
-            placeholder="Card Number"
-          />
-          <input
-            type="text"
-            className="mt-4 w-full border p-2 rounded"
-            placeholder="MM/YY"
-          />
-          <select className="mt-4 w-full border p-2 rounded">
-            <option>{plan.title}</option>
-          </select>
-          <button
-            type="submit"
-            className="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white p-2 rounded"
-          >
-            Pay ${plan.price}
-          </button>
-        </form> */}
+
         {/* Checkout Form */}
         <Elements stripe={stripePromise}>
           <PaymentForm plan={plan} />

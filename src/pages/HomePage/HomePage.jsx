@@ -6,6 +6,7 @@ import { Button } from "@heroui/react";
 import TrendingArticles from "./TrendingArticles/TrendingArticles";
 import AllPublisher from "./AllPublisher";
 import StatisticsSection from "./StatisticsSection";
+import PlansSection from "./PlansSection";
 
 const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // State for showing modal
@@ -31,18 +32,50 @@ const Homepage = () => {
       <Helmet>
         <title>PrimeScope News | Home</title>
       </Helmet>
-      <h1 className="text-3xl font-bold text-center mt-10">
-        Welcome to the Homepage
+      <h1 className="text-4xl font-semibold font-robotoSlab text-center mt-10">
+        Welcome to the Homepage{" "}
+        <span className="text-4xl font-semibold font-bigShouldersText">
+          Welcome to the Homepage
+        </span>
       </h1>
-      <p className="text-gray-600 text-center mt-2">
-        Enjoy browsing our content!
+      <p className="text-gray-600 font-lato text-center mt-2">
+        Enjoy browsing our content!{" "}
+        <span className="text-gray-600 font-openSans">
+          Enjoy browsing our content!
+        </span>
+      </p>
+      <h1 className="text-4xl font-semibold font-redHatDisplay text-center mt-10">
+        Welcome to the Homepage{" "}
+        <span className="text-4xl font-semibold font-nunito">
+          Welcome to the Homepage
+        </span>
+      </h1>
+      <p className="text-gray-600 font-raleway text-center mt-2">
+        Enjoy browsing our content!{" "}
+        <span className="text-gray-600 font-exo">
+          Enjoy browsing our content!
+        </span>
+      </p>
+      <h1 className="text-4xl font-semibold font-rancho text-center mt-10">
+        Welcome to the Homepage{" "}
+        <span className="text-4xl font-semibold font-poppins">
+          Welcome to the Homepage
+        </span>
+      </h1>
+      <p className="text-gray-600 font-nunito text-center mt-2">
+        Enjoy browsing our content!{" "}
+        <span className="text-gray-600 font-robotoSlab">
+          Enjoy browsing our content!
+        </span>
       </p>
 
       <TrendingArticles></TrendingArticles>
 
       <AllPublisher></AllPublisher>
 
-<StatisticsSection></StatisticsSection>
+      <StatisticsSection></StatisticsSection>
+
+      <PlansSection></PlansSection>
 
       {/* Headless UI Modal */}
       <Dialog
@@ -79,5 +112,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
-
