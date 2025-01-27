@@ -14,6 +14,7 @@ export default {
         raleway: ["Raleway", "serif"],
         bigShouldersText: ["Big Shoulders Text", "serif"],
         redHatDisplay: ["Red Hat Display", "serif"],
+        oldStandardTT: ["Old Standard TT", "serif"],
         poppins: ["Poppins", "serif"],
         nunito: ["Nunito", "serif"],
         exo: ["Exo", "serif"],

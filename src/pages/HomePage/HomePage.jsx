@@ -32,7 +32,7 @@ const Homepage = () => {
       <Helmet>
         <title>PrimeScope News | Home</title>
       </Helmet>
-      <h1 className="text-4xl font-semibold font-robotoSlab text-center mt-10">
+      <h1 className="text-4xl font-semibold font-robotoSlab text-center pt-20">
         Welcome to the Homepage{" "}
         <span className="text-4xl font-semibold font-bigShouldersText">
           Welcome to the Homepage
@@ -44,7 +44,7 @@ const Homepage = () => {
           Enjoy browsing our content!
         </span>
       </p>
-      <h1 className="text-4xl font-semibold font-redHatDisplay text-center mt-10">
+      <h1 className="text-4xl font-semibold font-redHatDisplay text-center">
         Welcome to the Homepage{" "}
         <span className="text-4xl font-semibold font-nunito">
           Welcome to the Homepage
@@ -56,9 +56,9 @@ const Homepage = () => {
           Enjoy browsing our content!
         </span>
       </p>
-      <h1 className="text-4xl font-semibold font-rancho text-center mt-10">
+      <h1 className="text-4xl font-semibold font-rancho text-center">
         Welcome to the Homepage{" "}
-        <span className="text-4xl font-semibold font-poppins">
+        <span className="text-4xl font-semibold font-oldStandardTT">
           Welcome to the Homepage
         </span>
       </h1>
