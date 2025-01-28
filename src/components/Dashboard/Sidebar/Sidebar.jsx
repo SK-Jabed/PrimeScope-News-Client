@@ -29,13 +29,9 @@ const Sidebar = () => {
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             <Link to="/">
-              <img
-                // className='hidden md:block'
-                src={logo}
-                alt="logo"
-                width="100"
-                height="100"
-              />
+              <h1 className="text-2xl font-bold text-indigo-600">
+                PrimeScope News
+              </h1>
             </Link>
           </div>
         </div>
@@ -56,15 +52,11 @@ const Sidebar = () => {
       >
         <div>
           <div>
-            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-lime-100 mx-auto">
+            <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-blue-100 mx-auto">
               <Link to="/">
-                <img
-                  // className='hidden md:block'
-                  src={logo}
-                  alt="logo"
-                  width="100"
-                  height="100"
-                />
+                <h1 className="text-2xl font-bold text-indigo-600">
+                  PrimeScope News
+                </h1>
               </Link>
             </div>
           </div>

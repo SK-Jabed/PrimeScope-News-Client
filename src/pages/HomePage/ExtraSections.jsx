@@ -33,19 +33,19 @@ const UniqueSections = () => {
                 name: "John Doe",
                 comment:
                   "This article changed my perspective on the topic entirely!",
-                avatar: "https://via.placeholder.com/100",
+                avatar: "https://i.ibb.co.com/QJTQxBQ/cr7.jpg",
               },
               {
                 name: "Jane Smith",
                 comment:
                   "I’ve been following this website for months, and it’s amazing!",
-                avatar: "https://via.placeholder.com/100",
+                avatar: "https://i.ibb.co.com/k5Pqy6C/neymar-jr-pic.jpg",
               },
               {
                 name: "Sam Wilson",
                 comment:
                   "Fantastic insights and great writing. Highly recommend!",
-                avatar: "https://via.placeholder.com/100",
+                avatar: "https://i.ibb.co.com/jMfKQV2/messi.jpg",
               },
             ].map((reader, idx) => (
               <div
