@@ -52,7 +52,7 @@ const AddArticle = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-8 pt-14">
+    <div className="min-h-screen bg-gray-100 pb-8 pt-14 px-2">
       <Helmet>
         <title>Add Article | PrimeScope News</title>
       </Helmet>

@@ -43,7 +43,11 @@ const Statistics = () => {
   });
 
   if (publishersLoading || articlesLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen text-lg font-semibold">
+        Loading...
+      </div>
+    );
   }
 
   // Calculate data for the pie chart
@@ -79,13 +83,21 @@ const Statistics = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">Statistics</h1>
+    <div className="p-8 bg-gray-50 min-h-screen">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-gray-800 mb-2">
+          Statistics Dashboard
+        </h1>
+        <p className="text-lg text-gray-600">
+          A detailed view of article statistics, including publisher
+          contributions and view trends.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Pie Chart */}
-        <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
             Articles by Publishers (%)
           </h2>
           <Chart
@@ -102,28 +114,11 @@ const Statistics = () => {
           />
         </div>
 
-        {/* Bar Chart */}
-        <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">
-            Article Count by Publisher
-          </h2>
-          <Chart
-            chartType="BarChart"
-            data={barChartData}
-            options={{
-              title: "Article Count by Publisher",
-              hAxis: { title: "Articles" },
-              vAxis: { title: "Publisher" },
-              colors: ["#3498db"],
-            }}
-            width="100%"
-            height="300px"
-          />
-        </div>
-
         {/* Line Chart */}
-        <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Views Per Article</h2>
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+            Views Per Article
+          </h2>
           <Chart
             chartType="LineChart"
             data={lineChartData}
@@ -138,9 +133,26 @@ const Statistics = () => {
           />
         </div>
       </div>
+
+      <div className="mt-8 bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4 text-center">
+          Article Count by Publisher
+        </h2>
+        <Chart
+          chartType="BarChart"
+          data={barChartData}
+          options={{
+            title: "Article Count by Publisher",
+            hAxis: { title: "Articles" },
+            vAxis: { title: "Publisher" },
+            colors: ["#3498db"],
+          }}
+          width="100%"
+          height="400px"
+        />
+      </div>
     </div>
   );
 };
 
 export default Statistics;
-

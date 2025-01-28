@@ -67,12 +67,21 @@ const AdminArticles = () => {
 
   return (
     <div className="p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-3xl font-bold mb-6">All Articles</h2>
+      {/* Gradient Header */}
+      <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 mb-2">
+        Admin Articles Management
+      </h2>
+      <p className="text-gray-600 mb-6">
+        Manage all user-submitted articles. Approve, decline, delete, or mark as
+        premium.
+      </p>
+
       <AdminArticlesTable
         articles={paginatedArticles}
         refetch={refetch}
         onOpenDeclineModal={handleOpenDeclineModal}
       />
+
       {declineArticleId && (
         <DeclineArticleModal
           articleId={declineArticleId}
@@ -80,6 +89,7 @@ const AdminArticles = () => {
           refetch={refetch}
         />
       )}
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -92,4 +102,3 @@ const AdminArticles = () => {
 };
 
 export default AdminArticles;
-

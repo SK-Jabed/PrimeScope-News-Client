@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
 import Select from "react-select";
+import { useForm } from "react-hook-form";
 import { imageUpload } from "../../api/utils";
 import usePublishers from "../../hooks/usePublishers";
 
@@ -36,13 +36,14 @@ const UpdateArticleForm = ({ onSubmit, defaultValues = {} }) => {
       className="bg-white shadow-lg rounded-lg p-8 max-w-2xl mx-auto space-y-6"
     >
       <div className="text-center mb-8">
-              <h1 className="text-4xl font-robotoSlab font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                Update Your Article
-              </h1>
-              <p className="text-gray-500 mt-1 text-lg">
-                Modify and refine your article below to ensure it stands out.
-              </p>
-            </div>
+        <h1 className="text-4xl font-robotoSlab font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+          Update Your Article
+        </h1>
+        <p className="text-gray-500 mt-1 text-lg">
+          Modify and refine your article below to ensure it stands out.
+        </p>
+      </div>
+      
       {/* Title */}
       <div>
         <label className="block text-sm font-medium mb-2">Title</label>
@@ -123,7 +124,7 @@ const UpdateArticleForm = ({ onSubmit, defaultValues = {} }) => {
       {/* Submit Button */}
       <button
         type="submit"
-        className="bg-gradient-to-r from-indigo-500 via-purple-500 to-red-400 text-white font-bold px-6 py-3 rounded-lg hover:shadow-lg hover:transition duration-300 active:105"
+        className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-red-400 text-white font-bold px-6 py-3 rounded-lg hover:shadow-lg hover:transition duration-300 active:105"
       >
         Update Article
       </button>
