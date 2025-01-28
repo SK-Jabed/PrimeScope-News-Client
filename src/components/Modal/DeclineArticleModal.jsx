@@ -70,14 +70,27 @@ const DeclineArticleModal = ({ articleId, onClose, refetch }) => {
   };
 
   return (
-    <Modal isOpen={true} onClose={onClose}>
+    <Modal
+      backdrop="blur"
+      classNames={{
+        body: "py-6",
+        backdrop: "bg-[#292f46]/20 backdrop-opacity-20",
+        base: "border-[#292f46] bg-[#19172c] dark:bg-[#19172c] text-[#a8b0d3]",
+        header: "border-b-[1px] border-[#292f46]",
+        footer: "border-t-[1px] border-[#292f46]",
+        closeButton: "hover:bg-white/5 active:bg-white/10",
+      }}
+      radius="lg"
+      isOpen={true}
+      onClose={onClose}
+    >
       <ModalContent>
-        <ModalHeader className="text-lg font-semibold">
+        <ModalHeader className="flex flex-col gap-1 text-lg font-semibold text-center text-white">
           Decline Article
         </ModalHeader>
         <ModalBody>
           <textarea
-            className="w-full border border-gray-300 p-2 rounded"
+            className="w-full bg-gray-800 border border-gray-800 p-2 rounded"
             rows="4"
             placeholder="Enter reason for declining..."
             value={reason}
@@ -85,10 +98,16 @@ const DeclineArticleModal = ({ articleId, onClose, refetch }) => {
           />
         </ModalBody>
         <ModalFooter>
-          <Button variant="light" onClick={onClose}>
+          <Button
+            className="bg-red-600 text-white rounded-md hover:bg-red-700"
+            onClick={onClose}
+          >
             Cancel
           </Button>
-          <Button color="danger" onClick={handleDecline}>
+          <Button
+            className="bg-green-600 text-white rounded-md hover:bg-green-700"
+            onClick={handleDecline}
+          >
             Submit
           </Button>
         </ModalFooter>
