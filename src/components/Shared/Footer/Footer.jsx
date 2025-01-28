@@ -7,9 +7,10 @@ const Footer = () => {
         <div className="mx-auto max-w-screen-xl px-3 pb-6 pt-14 sm:px-4 lg:px-6">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex justify-center text-teal-600 sm:justify-start dark:text-teal-300">
-              <span className='text-3xl font-bold font-robotoSlab'>
-
-              Logo
+              <span className="text-3xl font-bold font-robotoSlab">
+                <h1 className="text-2xl font-bold text-indigo-600">
+                  PrimeScope News
+                </h1>
               </span>
             </div>
 
@@ -202,7 +203,6 @@ const Footer = () => {
               <div className="mx-auto mt-4 max-w-md sm:ms-0">
                 <p className="text-center sm:text-left leading-relaxed text-gray-500 ltr:sm:text-left rtl:sm:text-right dark:text-gray-400">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  
                 </p>
 
                 <form className="mt-3">

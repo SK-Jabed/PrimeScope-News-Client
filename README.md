@@ -24,7 +24,7 @@ The **PrimeScope News** client-side application aims to:
 ---
 
 ## 🌐 **Live Version**
-Explore the live version of PrimeScope News: [PrimeScope News](https://primescope-news.example.com)
+Explore the live version of PrimeScope News: [PrimeScope News](https://b10-assignment-12.web.app/)
 
 ---
 
@@ -73,8 +73,8 @@ Explore the live version of PrimeScope News: [PrimeScope News](https://primescop
 ---
 
  ## 🚀 Deployment
-- **Client**: [Netlify Link](#)
-- **Server**: [Vercel Link](#)
+- **Client**: [Netlify Link](https://b10-assignment-12.web.app/)
+- **Server**: [Vercel Link](https://b10-assignment-12-server.vercel.app/)
 
 ---
 
@@ -88,4 +88,4 @@ Explore the live version of PrimeScope News: [PrimeScope News](https://primescop
 ## 🔧 Installation & Setup
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/crowdcube.git
+   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-SK-Jabed

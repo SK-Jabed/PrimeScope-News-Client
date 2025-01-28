@@ -107,6 +107,7 @@ import Marquee from "react-fast-marquee";
 import avatarImg from "../../../assets/placeholder.jpg";
 import useAuth from "../../../hooks/useAuth"; // Custom hook for user authentication
 import useUserData from "../../../hooks/useUserData";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -119,12 +120,6 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const isAdmin = userData?.role === "admin";
-
-
-  const handleLogout = () => {
-    // Assuming logout is handled by a global state or context
-    navigate("/login"); // Redirect to login page after logout
-  };
 
   return (
     <div className="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
@@ -180,19 +175,27 @@ const Navbar = () => {
               </Link>
             </li>
 
-            <li>
-              <Link to="/dashboard" className="hover:text-indigo-600">
-                Dashboard
-              </Link>
-            </li>
-
-
+            {isAdmin && (
               <li>
-                <Link to="/premium-articles" className="hover:text-indigo-600">
+                <Link
+                  to="/dashboard"
+                  className="block text-lg font-medium hover:text-indigo-600"
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
+
+            {userData?.isPremium && (
+              <li>
+                <Link
+                  to="/premiumArticles"
+                  className="block text-lg font-medium hover:text-indigo-600"
+                >
                   Premium Articles
                 </Link>
               </li>
-
+            )}
           </ul>
 
           {/* Right Section */}
@@ -201,13 +204,13 @@ const Navbar = () => {
             {!user ? (
               <>
                 <button
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/authentication/login")}
                   className="text-indigo-600 font-semibold hover:underline"
                 >
                   Login
                 </button>
                 <button
-                  onClick={() => navigate("/register")}
+                  onClick={() => navigate("/authentication/register")}
                   className="text-indigo-600 font-semibold hover:underline"
                 >
                   Register
@@ -216,7 +219,7 @@ const Navbar = () => {
             ) : (
               <div className="relative">
                 <img
-                  src={user.photoURL || "/default-avatar.png"}
+                  src={userData?.image || "/default-avatar.png"}
                   alt="User"
                   className="w-10 h-10 rounded-full cursor-pointer"
                   onClick={toggleMenu}
@@ -233,7 +236,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <Link
-                        to="/my-articles"
+                        to="/myArticles"
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
                         My Articles
@@ -241,7 +244,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <button
-                        onClick={handleLogout}
+                        onClick={logOut}
                         className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                       >
                         Logout
@@ -267,7 +270,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/add-articles"
+                to="/addArticles"
                 className="block text-lg font-medium hover:text-indigo-600"
               >
                 Add Articles
@@ -275,7 +278,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/all-articles"
+                to="/articles"
                 className="block text-lg font-medium hover:text-indigo-600"
               >
                 All Articles
@@ -294,7 +297,7 @@ const Navbar = () => {
             {userData?.isPremium && (
               <li>
                 <Link
-                  to="/premium-articles"
+                  to="/premiumArticles"
                   className="block text-lg font-medium hover:text-indigo-600"
                 >
                   Premium Articles
