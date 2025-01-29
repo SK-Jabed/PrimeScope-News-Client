@@ -98,7 +98,6 @@
 
 // export default Navbar;
 
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";

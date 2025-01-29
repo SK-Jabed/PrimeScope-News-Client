@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => {
   return (
@@ -15,7 +15,8 @@ const Footer = () => {
             </div>
 
             <p className="mt-2 max-w-md text-center leading-relaxed text-gray-500 sm:text-left lg:mt-0 dark:text-gray-400">
-              Explore our trending news and an join on an innovative newspaper platform that combines technology.
+              Explore our trending news and an join on an innovative newspaper
+              platform that combines technology.
             </p>
           </div>
 
