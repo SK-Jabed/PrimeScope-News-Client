@@ -98,100 +98,97 @@
 
 // export default Navbar;
 
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { BsCalendar2Date } from "react-icons/bs";
 import moment from "moment";
-import { AiOutlineMenu } from "react-icons/ai";
-import Marquee from "react-fast-marquee";
 import avatarImg from "../../../assets/placeholder.jpg";
-import useAuth from "../../../hooks/useAuth"; // Custom hook for user authentication
+import useAuth from "../../../hooks/useAuth"; // Authentication Hook
 import useUserData from "../../../hooks/useUserData";
-import LoadingSpinner from "../LoadingSpinner";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu"; // Ensure it's installed
+import { Button } from "@/components/ui/button"; // Shadcn UI Button
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logOut } = useAuth();
-
-  const { data: userData, isLoading: userLoading } = useUserData(user?.email); // Fetch user's premium status
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  console.log(userData);
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const navigate = useNavigate();
+  const { data: userData } = useUserData(user?.email);
   const isAdmin = userData?.role === "admin";
 
   return (
-    <div className="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
-      {/* Top Section: Date and Subscribe */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-100 border-b border-gray-200">
-        <span className="text-sm text-gray-600">
+    <header className="w-full bg-white shadow-md sticky top-0 left-0 z-50">
+      {/* Top Header */}
+      <div className="flex justify-between items-center px-6 py-2 border-b">
+        <span className="text-gray-600 flex items-center gap-2">
+          <BsCalendar2Date className="text-lg" />
           {moment().format("dddd, MMMM D, YYYY")}
         </span>
-        <div className="text-center py-4">
-          <h1 className="text-2xl font-bold text-indigo-600">
-            PrimeScope News
-          </h1>
-          <p className="text-sm text-gray-500">Your gateway to breaking news</p>
-        </div>
-        <button
+
+        <h1 className="text-3xl font-extrabold text-transparent bg-gradient-to-r from-blue-500 via-purple-600 to-rose-400 bg-clip-text">
+          PrimeScope News
+        </h1>
+
+        <Button
           onClick={() => navigate("/subscription")}
-          className="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700"
+          className="bg-blue-600 hover:bg-blue-700 text-white"
         >
           Subscribe
-        </button>
+        </Button>
       </div>
 
-      {/* Logo and Description */}
-
-      {/* Navbar Section */}
-      <nav className="border-t border-b border-gray-200">
-        <div className="flex items-center justify-between px-4 py-3">
+      {/* Navbar */}
+      <nav className="w-full border-t border-b bg-white ">
+        <div className="flex items-center justify-between px-6 py-3">
           {/* Hamburger Menu */}
-          <button className="text-2xl text-gray-600" onClick={toggleMenu}>
-            {menuOpen ? <FaTimes /> : <FaBars />}
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="text-2xl text-gray-700 focus:outline-none"
+          >
+            {sidebarOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          {/* Centered Navigation Links */}
-          <ul className="hidden lg:flex gap-6 font-medium">
+          {/* Navigation Links */}
+          <ul className="hidden lg:flex gap-6 font-semibold">
             <li>
-              <Link to="/" className="hover:text-indigo-600">
+              <Link to="/" className="hover:text-blue-600">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/addArticle" className="hover:text-indigo-600">
-                Add Articles
-              </Link>
-            </li>
-            <li>
-              <Link to="/articles" className="hover:text-indigo-600">
+              <Link to="/articles" className="hover:text-blue-600">
                 All Articles
               </Link>
             </li>
             <li>
-              <Link to="/subscription" className="hover:text-indigo-600">
+              <Link to="/addArticle" className="hover:text-blue-600">
+                Add Articles
+              </Link>
+            </li>
+            <li>
+              <Link to="/subscription" className="hover:text-blue-600">
                 Subscription
               </Link>
             </li>
-
             {isAdmin && (
               <li>
-                <Link
-                  to="/dashboard"
-                  className="block text-lg font-medium hover:text-indigo-600"
-                >
+                <Link to="/dashboard" className="hover:text-blue-600">
                   Dashboard
                 </Link>
               </li>
             )}
-
             {userData?.isPremium && (
               <li>
-                <Link
-                  to="/premiumArticles"
-                  className="block text-lg font-medium hover:text-indigo-600"
-                >
+                <Link to="/premiumArticles" className="hover:text-blue-600">
                   Premium Articles
                 </Link>
               </li>
@@ -199,140 +196,117 @@ const Navbar = () => {
           </ul>
 
           {/* Right Section */}
-
           <div className="flex items-center gap-4">
             {!user ? (
               <>
-                <button
+                <Button
                   onClick={() => navigate("/authentication/login")}
-                  className="text-indigo-600 font-semibold hover:underline"
+                  variant="outline"
                 >
-                  Login
-                </button>
-                <button
+                  <MdOutlineLogin className="mr-1" /> Login
+                </Button>
+                <Button
                   onClick={() => navigate("/authentication/register")}
-                  className="text-indigo-600 font-semibold hover:underline"
+                  variant="outline"
                 >
-                  Register
-                </button>
+                  <AiOutlineUserAdd className="mr-1" /> Register
+                </Button>
               </>
             ) : (
-              <div className="relative">
-                <img
-                  src={userData?.image || "/default-avatar.png"}
-                  alt="User"
-                  className="w-10 h-10 rounded-full cursor-pointer"
-                  onClick={toggleMenu}
-                />
-                {menuOpen && (
-                  <ul className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg overflow-hidden">
-                    <li>
-                      <Link
-                        to="/profile"
-                        className="block px-4 py-2 hover:bg-gray-100"
-                      >
-                        Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/myArticles"
-                        className="block px-4 py-2 hover:bg-gray-100"
-                      >
-                        My Articles
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        onClick={logOut}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                )}
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <img
+                    src={userData?.image || avatarImg}
+                    alt="User"
+                    className="w-10 h-10 rounded-full cursor-pointer"
+                  />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile">My Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/myArticles">My Articles</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logOut}>
+                    <MdOutlineLogout className="mr-2" /> Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             )}
           </div>
         </div>
-
-        {/* Animated Sidebar Menu for Small Screens */}
-        {menuOpen && (
-          <ul className="lg:hidden bg-gray-50 border-t border-b border-gray-200 p-4 space-y-2">
-            <li>
-              <Link
-                to="/"
-                className="block text-lg font-medium hover:text-indigo-600"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/addArticles"
-                className="block text-lg font-medium hover:text-indigo-600"
-              >
-                Add Articles
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/articles"
-                className="block text-lg font-medium hover:text-indigo-600"
-              >
-                All Articles
-              </Link>
-            </li>
-            {isAdmin && (
-              <li>
-                <Link
-                  to="/dashboard"
-                  className="block text-lg font-medium hover:text-indigo-600"
-                >
-                  Dashboard
-                </Link>
-              </li>
-            )}
-            {userData?.isPremium && (
-              <li>
-                <Link
-                  to="/premiumArticles"
-                  className="block text-lg font-medium hover:text-indigo-600"
-                >
-                  Premium Articles
-                </Link>
-              </li>
-            )}
-          </ul>
-        )}
       </nav>
 
-      {/* Breaking News Marquee */}
-      {/* <div className="flex gap-4 items-center py-4 pl-4 pr-20 bg-[#F3F3F3]">
-        <p className="text-lg font-medium text-white bg-[#D72050] px-7 py-3">
-          Latest
-        </p>
-        <Marquee
-          pauseOnHover={true}
-          speed={100}
-          className="space-x-4 text-[#403F3F] text-lg font-semibold"
-        >
-          <Link to={"/news"}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Repellendus laudantium explicabo.
-          </Link>
-          <Link to={"/news"}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Repellendus laudantium explicabo.
-          </Link>
-          <Link to={"/news"}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Repellendus laudantium explicabo.
-          </Link>
-        </Marquee>
-      </div> */}
-    </div>
+      {/* Sidebar Menu */}
+      <aside
+        className={`fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 z-50`}
+      >
+        <div className="p-6">
+          <h2 className="text-2xl font-bold">PrimeScope News</h2>
+          <p className="text-sm text-gray-500">Your gateway to breaking news</p>
+        </div>
+
+        <ul className="px-6 space-y-4">
+          <li>
+            <Link to="/" className="block text-lg hover:text-blue-600">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/articles" className="block text-lg hover:text-blue-600">
+              All Articles
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/addArticle"
+              className="block text-lg hover:text-blue-600"
+            >
+              Add Articles
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/subscription"
+              className="block text-lg hover:text-blue-600"
+            >
+              Subscription
+            </Link>
+          </li>
+          {isAdmin && (
+            <li>
+              <Link
+                to="/dashboard"
+                className="block text-lg hover:text-blue-600"
+              >
+                Dashboard
+              </Link>
+            </li>
+          )}
+          {userData?.isPremium && (
+            <li>
+              <Link
+                to="/premiumArticles"
+                className="block text-lg hover:text-blue-600"
+              >
+                Premium Articles
+              </Link>
+            </li>
+          )}
+        </ul>
+      </aside>
+
+      {/* Click anywhere to close Sidebar */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 bg-black opacity-50 z-40"
+        ></div>
+      )}
+    </header>
   );
 };
 

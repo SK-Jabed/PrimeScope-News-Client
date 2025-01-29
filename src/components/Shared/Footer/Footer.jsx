@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-white dark:bg-gray-900">
+      <footer className="bg-gray-200">
         <div className="mx-auto max-w-screen-xl px-3 pb-6 pt-14 sm:px-4 lg:px-6">
           <div className="lg:flex lg:items-center lg:justify-between">
             <div className="flex justify-center text-teal-600 sm:justify-start dark:text-teal-300">
@@ -15,8 +15,7 @@ const Footer = () => {
             </div>
 
             <p className="mt-2 max-w-md text-center leading-relaxed text-gray-500 sm:text-left lg:mt-0 dark:text-gray-400">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
-              consequuntur amet culpa cum itaque neque.
+              Explore our trending news and an join on an innovative newspaper platform that combines technology.
             </p>
           </div>
 
@@ -202,7 +201,7 @@ const Footer = () => {
 
               <div className="mx-auto mt-4 max-w-md sm:ms-0">
                 <p className="text-center sm:text-left leading-relaxed text-gray-500 ltr:sm:text-left rtl:sm:text-right dark:text-gray-400">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Subscribe for access premium content & articles
                 </p>
 
                 <form className="mt-3">

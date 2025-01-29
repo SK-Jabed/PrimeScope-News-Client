@@ -18,8 +18,8 @@ The **PrimeScope News** client-side application aims to:
 ---
 
 ## 🔑 **Admin Credentials**
-- **Username:** admin@example.com  
-- **Password:** admin123  
+- **Username:** ironman@gmail.com  
+- **Password:** 123456Aa@ 
 
 ---
 
@@ -88,4 +88,4 @@ Explore the live version of PrimeScope News: [PrimeScope News](https://b10-assig
 ## 🔧 Installation & Setup
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-SK-Jabed
+   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-SK-Jabed.git
