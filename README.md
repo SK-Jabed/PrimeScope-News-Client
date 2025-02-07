@@ -1,5 +1,7 @@
 # **PrimeScope News - Client-Side** 📰🚀
 
+![PrimeScope News Banner](https://github.com/SK-Jabed/PrimeScope-News-Client/blob/8f762c0c8032396a2521db9a1e2f0e2c1a0d6f6f/src/assets/Screenshot%202025-02-07%20153003.png)
+
 ## 📌 **Project Overview**  
 **PrimeScope News** is a modern, feature-rich, and interactive news platform designed to provide **real-time access to the latest news, trending stories, and premium content**. The client-side of **PrimeScope News** is built with **React, Tailwind CSS, and Firebase**, ensuring an **engaging, responsive, and secure** user experience.  
 
