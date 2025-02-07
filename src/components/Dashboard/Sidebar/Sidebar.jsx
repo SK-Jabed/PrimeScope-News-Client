@@ -4,13 +4,9 @@ import { FcSettings } from "react-icons/fc";
 import { AiOutlineBars } from "react-icons/ai";
 import { BsGraphUp } from "react-icons/bs";
 import MenuItem from "./Menu/MenuItem";
-
 import useAuth from "../../../hooks/useAuth";
-
 import AdminMenu from "./Menu/AdminMenu";
 import { Link } from "react-router-dom";
-// import SellerMenu from "./Menu/SellerMenu";
-// import CustomerMenu from "./Menu/CustomerMenu";
 import logo from "../../../assets/logo/logo-flat.png";
 
 const Sidebar = () => {
