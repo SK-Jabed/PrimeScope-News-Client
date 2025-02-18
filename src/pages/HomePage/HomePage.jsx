@@ -8,6 +8,8 @@ import AllPublisher from "./AllPublisher";
 import StatisticsSection from "./StatisticsSection";
 import PlansSection from "./PlansSection";
 import ExtraSections from "./ExtraSections";
+import TrendingCategories from "./TrendingCategories";
+import EditorsPick from "./EditorsPick";
 
 const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,6 +41,10 @@ const Homepage = () => {
       <AllPublisher></AllPublisher>
 
       <ExtraSections></ExtraSections>
+
+      <TrendingCategories />
+
+      <EditorsPick />
 
       <StatisticsSection></StatisticsSection>
 

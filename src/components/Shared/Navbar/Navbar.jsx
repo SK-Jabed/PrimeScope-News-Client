@@ -134,11 +134,12 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
+          <ThemeToggle />
           </div>
         </div>
       </nav>
 
-      <ThemeToggle />
+      
 
       {/* Sidebar Menu */}
       <aside
