@@ -1,15 +1,11 @@
-
-
-
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 
-
 const PremiumArticles = () => {
   const [premiumArticles, setPremiumArticles] = useState([]);
   const [loading, setLoading] = useState(false);
-  const axiosSecure = useAxiosSecure(); // Your existing axiosSecure instance
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
   // Fetch premium articles from the server
