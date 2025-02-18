@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Button } from "@heroui/react";
+
 import TrendingArticles from "./TrendingArticles/TrendingArticles";
 import AllPublisher from "./AllPublisher";
 import StatisticsSection from "./StatisticsSection";
@@ -10,8 +10,8 @@ import PlansSection from "./PlansSection";
 import ExtraSections from "./ExtraSections";
 
 const Homepage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for showing modal
-  const navigate = useNavigate(); // Hook for navigation
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Set a timer to show modal after 10 seconds
@@ -24,8 +24,8 @@ const Homepage = () => {
   }, []);
 
   const handleSubscribeClick = () => {
-    setIsModalOpen(false); // Close the modal
-    navigate("/subscription"); // Navigate to the subscription page
+    setIsModalOpen(false);
+    navigate("/subscription");
   };
 
   return (
