@@ -1,21 +1,3 @@
-// import { Helmet } from "react-helmet-async";
-// import AdminStatistics from "../../../components/Dashboard/Statistics/AdminStatistics";
-
-// const Statistics = () => {
-//   return (
-//     <div>
-//       <Helmet>
-//         <title>Dashboard | Statistics</title>
-//       </Helmet>
-//       <AdminStatistics />
-//     </div>
-//   );
-// };
-
-// export default Statistics;
-
-
-
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Chart } from "react-google-charts";
