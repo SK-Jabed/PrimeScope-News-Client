@@ -6,7 +6,7 @@ import LoadingSpinner from "../components/Shared/LoadingSpinner";
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isAdmin, isAdminLoading] = useAdmin();
-  // console.log(isAdmin);
+
   const location = useLocation();
 
   if (loading || isAdminLoading) {
