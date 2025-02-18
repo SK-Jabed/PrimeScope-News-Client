@@ -8,6 +8,7 @@ import AuthProvider from "./providers/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { HeroUIProvider } from "@heroui/react";
+import { ThemeProvider } from "./providers/ThemeContext";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -15,14 +16,16 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <HeroUIProvider>
-        <HelmetProvider>
-          <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-          </QueryClientProvider>
-          <Toaster position="top-center" reverseOrder={false} />
-        </HelmetProvider>
-      </HeroUIProvider>
+      <ThemeProvider>
+        <HeroUIProvider>
+          <HelmetProvider>
+            <QueryClientProvider client={queryClient}>
+              <RouterProvider router={router} />
+            </QueryClientProvider>
+            <Toaster position="top-center" reverseOrder={false} />
+          </HelmetProvider>
+        </HeroUIProvider>
+      </ThemeProvider>
     </AuthProvider>
   </StrictMode>
 );

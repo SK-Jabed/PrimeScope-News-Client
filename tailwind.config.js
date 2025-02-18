@@ -4,7 +4,7 @@ const { nextui } = require("@nextui-org/react");
 const {heroui} = require("@heroui/react");
 
 export default {
-    darkMode: ["class"],
+    darkMode: "class",
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
   	extend: {
