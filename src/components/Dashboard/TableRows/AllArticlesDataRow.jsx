@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 const AllArticlesDataRow = () => {
   return (
     <tr>
@@ -34,7 +35,7 @@ const AllArticlesDataRow = () => {
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <button
-        //   onClick={() => setIsOpen(true)}
+          //   onClick={() => setIsOpen(true)}
           className="relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight"
         >
           <span className="absolute cursor-pointer inset-0 bg-red-200 opacity-50 rounded-full"></span>

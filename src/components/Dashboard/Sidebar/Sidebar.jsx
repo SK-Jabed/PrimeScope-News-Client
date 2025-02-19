@@ -7,7 +7,6 @@ import MenuItem from "./Menu/MenuItem";
 import useAuth from "../../../hooks/useAuth";
 import AdminMenu from "./Menu/AdminMenu";
 import { Link } from "react-router-dom";
-import logo from "../../../assets/logo/logo-flat.png";
 
 const Sidebar = () => {
   const { logOut } = useAuth();

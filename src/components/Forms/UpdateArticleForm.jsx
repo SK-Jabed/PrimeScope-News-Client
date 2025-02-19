@@ -43,7 +43,7 @@ const UpdateArticleForm = ({ onSubmit, defaultValues = {} }) => {
           Modify and refine your article below to ensure it stands out.
         </p>
       </div>
-      
+
       {/* Title */}
       <div>
         <label className="block text-sm font-medium mb-2">Title</label>
