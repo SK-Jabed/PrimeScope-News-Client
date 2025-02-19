@@ -18,6 +18,8 @@ const AllArticlesPage = () => {
   const [selectedPublisher, setSelectedPublisher] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [sortOrder, setSortOrder] = useState("newest"); // Default sorting order
+
   const { publishers, isLoading: publishersLoading } = usePublishers();
   const { user } = useAuth();
   const { data: userData, isLoading: userLoading } = useUserData(user?.email);
@@ -37,7 +39,16 @@ const AllArticlesPage = () => {
           tags: selectedTags.join(","),
         },
       });
-      setArticles(data.articles);
+
+      let sortedArticles = [...data.articles];
+
+      if (sortOrder === "newest") {
+        sortedArticles.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
+      } else {
+        sortedArticles.sort((a, b) => new Date(a.postedDate) - new Date(b.postedDate));
+      }
+
+      setArticles(sortedArticles);
     } catch (error) {
       console.error("Error fetching articles:", error);
     } finally {
@@ -47,7 +58,7 @@ const AllArticlesPage = () => {
 
   useEffect(() => {
     fetchArticles();
-  }, [searchQuery, selectedPublisher, selectedTags]);
+  }, [searchQuery, selectedPublisher, selectedTags, sortOrder]);
 
   const toggleTag = (tag) => {
     setSelectedTags((prev) =>
@@ -68,7 +79,7 @@ const AllArticlesPage = () => {
   }
 
   return (
-    <div>
+    <div className="dark:bg-gray-900 dark:text-white min-h-screen">
       {/* Banner */}
       <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-16 mb-8">
         <Container>
@@ -89,12 +100,22 @@ const AllArticlesPage = () => {
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full md:w-2/3 border p-3 rounded-lg shadow focus:ring-2 focus:ring-indigo-500"
+            className="w-full md:w-2/3 border p-3 rounded-lg shadow focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
           />
+
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="border p-3 rounded-lg shadow focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+
           <select
             value={selectedPublisher}
             onChange={(e) => setSelectedPublisher(e.target.value)}
-            className="border p-3 rounded-lg shadow focus:ring-2 focus:ring-indigo-500"
+            className="border p-3 rounded-lg shadow focus:ring-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
           >
             <option value="">All Publishers</option>
             {!publishersLoading &&
@@ -104,15 +125,16 @@ const AllArticlesPage = () => {
                 </option>
               ))}
           </select>
+
           <div className="flex gap-2">
             {tags.map((tag) => (
               <button
                 key={tag}
                 onClick={() => toggleTag(tag)}
-                className={`px-4 py-2 border rounded-lg ${
+                className={`px-4 py-2 border rounded-lg transition ${
                   selectedTags.includes(tag)
                     ? "bg-indigo-500 text-white"
-                    : "bg-gray-100"
+                    : "bg-gray-100 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                 }`}
               >
                 {tag}
@@ -132,10 +154,10 @@ const AllArticlesPage = () => {
             {articles.map((article) => (
               <div
                 key={article._id}
-                className={`p-4 border rounded-lg shadow-md ${
+                className={`p-4 border rounded-lg shadow-md transition ${
                   article.isPremium
-                    ? "bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white"
-                    : "bg-white"
+                    ? "border-yellow-500 bg-yellow-50 dark:bg-gray-800 dark:border-yellow-500"
+                    : "border-gray-300 dark:bg-gray-800 dark:border-gray-600"
                 }`}
                 data-aos="fade-up"
               >
@@ -145,23 +167,14 @@ const AllArticlesPage = () => {
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
                 <h3 className="text-xl font-bold">{article.title}</h3>
-                <div className="flex gap-2 my-2">
-                  {article.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-sm rounded bg-indigo-200 text-indigo-800"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <p className="text-sm text-gray-700 mb-4">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
                   {article.description.slice(0, 100)}...
                 </p>
+
                 <button
                   disabled={article.isPremium && !userData?.isPremium}
                   onClick={() => navigate(`/articleDetails/${article._id}`)}
-                  className={`w-full px-4 py-2 rounded-lg ${
+                  className={`w-full px-4 py-2 rounded-lg transition ${
                     article.isPremium && !userData?.isPremium
                       ? "bg-gray-400 text-gray-700 cursor-not-allowed"
                       : "bg-indigo-500 text-white hover:bg-indigo-600"
@@ -181,4 +194,3 @@ const AllArticlesPage = () => {
 };
 
 export default AllArticlesPage;
-
