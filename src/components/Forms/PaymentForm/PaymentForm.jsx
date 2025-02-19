@@ -25,45 +25,33 @@ const PaymentForm = ({ plan }) => {
       axiosSecure
         .post("/create-payment-intent", { price: subscriptionPrice })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
   }, [axiosSecure, subscriptionPrice]);
 
   const handleSubmit = async (event) => {
-    // Block native form submission.
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      return;
-    }
+    if (!stripe || !elements) return;
 
     const card = elements.getElement(CardElement);
+    if (!card) return;
 
-    if (card == null) {
-      return;
-    }
-
-    // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
 
     if (error) {
-      console.log("Payment error", error);
       setError(error.message);
-    } else {
-      console.log("Payment successful", paymentMethod);
-      setError("");
+      return;
     }
 
-    // Confirm Payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: card,
+          card,
           billing_details: {
             email: user?.email || "anonymous",
             name: user?.displayName || "anonymous",
@@ -73,72 +61,67 @@ const PaymentForm = ({ plan }) => {
 
     if (confirmError) {
       console.log("Confirm error");
-    } else {
-      console.log("Payment intent", paymentIntent);
-      if (paymentIntent?.status === "succeeded") {
-        const premiumTaken = new Date().toISOString();
-        const premiumPeriodDays =
-          plan.title === "1 Minute Plan"
-            ? 1 / 1440 // 1 minute in days
-            : plan.title === "5-Day Plan"
-            ? 5
-            : 10;
+      return;
+    }
 
-        await axiosSecure.patch(`/users/${user.email}`, {
-          premiumTaken,
-          isPremium: true,
-          premiumPeriodDays,
+    if (paymentIntent?.status === "succeeded") {
+      const premiumTaken = new Date().toISOString();
+      const premiumPeriodDays =
+        plan.title === "1 Minute Plan"
+          ? 1 / 1440
+          : plan.title === "5-Day Plan"
+          ? 5
+          : 10;
+
+      await axiosSecure.patch(`/users/${user.email}`, {
+        premiumTaken,
+        isPremium: true,
+        premiumPeriodDays,
+      });
+
+      const subscriptionData = {
+        email: user?.email,
+        name: user?.displayName,
+        price: subscriptionPrice,
+        transactionId: paymentIntent.id,
+        date: new Date(),
+      };
+
+      const res = await axiosSecure.post("/subscriptions", subscriptionData);
+      if (res.data?.insertedId) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Thank you for taking a subscription",
+          showConfirmButton: false,
+          timer: 1500,
         });
-
-        // Save subscription data
-        const subscriptionData = {
-          email: user?.email,
-          name: user?.displayName,
-          price: subscriptionPrice,
-          transactionId: paymentIntent.id,
-          date: new Date(),
-        };
-
-        const res = await axiosSecure.post("/subscriptions", subscriptionData);
-        if (res.data?.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Thank you for taking a subscription",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/subscription");
-        }
+        navigate("/subscription");
       }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="dark:text-white">
       <CardElement
         options={{
           style: {
             base: {
               fontSize: "16px",
               color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
-              },
+              "::placeholder": { color: "#aab7c4" },
             },
-            invalid: {
-              color: "#9e2146",
-            },
+            invalid: { color: "#9e2146" },
           },
         }}
+        className="dark:bg-gray-800 dark:text-white p-3 border rounded-lg"
       />
-      <select className="mb-4 w-full border p-2 rounded">
+      <select className="mb-4 w-full border p-2 rounded dark:bg-gray-700 dark:text-white">
         <option>{plan.title}</option>
       </select>
       <p className="text-red-600 mb-2">{error}</p>
       {transactionId && (
         <p className="text-green-600 mb-3">
-          {" "}
           Your transaction id: {transactionId}
         </p>
       )}
@@ -146,6 +129,7 @@ const PaymentForm = ({ plan }) => {
         type="submit"
         disabled={!stripe || !clientSecret}
         label={`Pay ${plan.price}$`}
+        className="dark:bg-indigo-600 dark:hover:bg-indigo-700"
       />
     </form>
   );
