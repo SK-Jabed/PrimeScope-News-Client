@@ -63,13 +63,13 @@ const PlansSection = () => {
   }, []);
 
   return (
-    <section className="py-16 px-6">
+    <section className="py-16 px-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Section Header */}
       <div className="text-center mb-12" data-aos="fade-up">
         <h2 className="text-5xl font-extrabold bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-transparent bg-clip-text">
           Choose Your Plan
         </h2>
-        <p className="text-lg text-gray-600 mt-3 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-gray-400 mt-3 max-w-2xl mx-auto">
           Select a subscription plan that suits your needs and unlock premium
           features.
         </p>
@@ -83,7 +83,7 @@ const PlansSection = () => {
         {plans.map((plan) => (
           <div
             key={plan.id}
-            className={`relative bg-white bg-opacity-10 backdrop-blur-lg rounded-xl shadow-xl border border-gray-300 border-opacity-30 p-8 overflow-hidden transform transition duration-300 hover:scale-105`}
+            className="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-300 dark:border-gray-600 p-8 transform transition duration-300 hover:scale-105"
             data-aos="zoom-in"
           >
             {/* Gradient Background Overlay */}
@@ -93,17 +93,15 @@ const PlansSection = () => {
 
             {/* Content */}
             <div className="relative text-center">
-              <h3 className="text-2xl font-bold text-gray-900">{plan.title}</h3>
-              <p className="mt-4 text-gray-700">{plan.description}</p>
-              <p className="text-5xl font-extrabold mt-4 text-black">
-                ${plan.price}
-              </p>
+              <h3 className="text-2xl font-bold">{plan.title}</h3>
+              <p className="mt-4">{plan.description}</p>
+              <p className="text-5xl font-extrabold mt-4">${plan.price}</p>
 
               {/* Features List */}
               <ul className="mt-4 space-y-2">
                 {plan.features.map((feature, index) => (
                   <li key={index} className="flex items-center justify-center">
-                    <span className="bg-gray-900 text-white px-3 py-1 rounded-full text-sm shadow-md">
+                    <span className="bg-gray-900 dark:bg-gray-600 text-white px-3 py-1 rounded-full text-sm shadow-md">
                       {feature}
                     </span>
                   </li>
@@ -112,7 +110,7 @@ const PlansSection = () => {
 
               {/* Subscribe Button */}
               <button
-                className="mt-6 bg-black text-white font-semibold px-6 py-2 rounded-full shadow-md hover:bg-gray-800 transition duration-300"
+                className="mt-6 bg-gray-900 dark:bg-gray-700 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:bg-gray-800 dark:hover:bg-gray-600 transition duration-300"
                 onClick={() => handleSubscription(plan)}
               >
                 Subscribe Now

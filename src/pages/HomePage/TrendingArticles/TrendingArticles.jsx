@@ -1,141 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
-// import "swiper/css/autoplay";
-// import moment from "moment";
-// import { FaRegEye } from "react-icons/fa";
-// import { Navigation, Pagination, Autoplay } from "swiper/modules";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
-// const TrendingArticles = () => {
-//   const [articles, setArticles] = useState([]);
-//   const axiosSecure = useAxiosSecure();
-
-//   useEffect(() => {
-//     // Fetch top 6 trending articles
-//     axiosSecure
-//       .get("/trending-articles")
-//       .then((res) => setArticles(res.data))
-//       .catch((err) => console.error("Failed to fetch articles:", err));
-//   }, [axiosSecure]);
-
-// console.log(articles);
-//   return (
-//     <div className="trending-banner my-10">
-//       <Swiper
-//         modules={[Navigation, Pagination, Autoplay]}
-//         navigation
-//         pagination={{ clickable: true }}
-//         autoplay={{ delay: 3000 }}
-//         loop={true}
-//         spaceBetween={30}
-//         slidesPerView={1}
-//         className="w-full"
-//       >
-//         {articles.map((article) => (
-//           <SwiperSlide key={article._id}>
-//             <div
-//               className="relative h-[450px] md:h-[500px] bg-cover bg-center rounded-lg shadow-md overflow-hidden"
-//               style={{ backgroundImage: `url(${article.image})` }}
-//             >
-//               {/* Dark Overlay */}
-//               <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 rounded-lg flex flex-col justify-end p-6 text-white">
-//                 {/* Tags */}
-//                 <div className="absolute top-5 left-5 flex flex-wrap gap-2">
-//                   {article.tags.map((tag, index) => (
-//                     <span
-//                       key={index}
-//                       className="bg-blue-500 text-white px-3 py-1 text-xs font-semibold rounded"
-//                     >
-//                       {tag}
-//                     </span>
-//                   ))}
-//                 </div>
-
-//                 {/* Status Badge */}
-//                 <div className="absolute top-5 right-5 flex gap-2">
-//                   {article.status === "approved" && (
-//                     <span className="bg-green-500 text-white px-3 py-1 text-xs font-semibold rounded">
-//                       Approved
-//                     </span>
-//                   )}
-//                   {article.status === "declined" && (
-//                     <span className="bg-red-500 text-white px-3 py-1 text-xs font-semibold rounded">
-//                       Declined
-//                     </span>
-//                   )}
-//                   {article.isPremium && (
-//                     <span className="bg-yellow-500 text-black px-3 py-1 text-xs font-semibold rounded">
-//                       Premium
-//                     </span>
-//                   )}
-//                 </div>
-
-//                 {/* Title & Description */}
-//                 <h2 className="text-2xl md:text-3xl font-bold mb-1">
-//                   {article.title}
-//                 </h2>
-//                 <p className="text-gray-300 text-sm mb-3 line-clamp-2">
-//                   {article.description}
-//                 </p>
-
-//                 {/* Date */}
-//                 <p className="text-gray-400 text-sm mb-3">
-//                   {moment(article.postedDate).format("MMMM D, YYYY")}
-//                 </p>
-
-//                 {/* Author & Publisher Info */}
-//                 <div className="flex items-center justify-between">
-//                   {/* Author */}
-//                   <div className="flex items-center space-x-3">
-//                     <img
-//                       src={article.author.photo}
-//                       alt={article.author.name}
-//                       className="w-8 h-8 rounded-full"
-//                     />
-//                     <div>
-//                       <p className="text-sm font-medium">
-//                         {article.author.name}
-//                       </p>
-//                       <p className="text-xs text-gray-300">
-//                         {article.author.email}
-//                       </p>
-//                     </div>
-//                   </div>
-
-//                   {/* Publisher */}
-//                   <div className="flex items-center space-x-3">
-//                     <img
-//                       src={article.publisher.publisherLogo}
-//                       alt={article.publisher.publisherName}
-//                       className="w-8 h-8 rounded-full"
-//                     />
-//                     <p className="text-sm font-medium">
-//                       {article.publisher.publisherName}
-//                     </p>
-//                   </div>
-//                 </div>
-
-//                 {/* Views Counter */}
-//                 <div className="flex items-center mt-3 space-x-2 text-gray-300">
-//                   <FaRegEye className="text-lg" />
-//                   <span>{article.views} Views</span>
-//                 </div>
-//               </div>
-//             </div>
-//           </SwiperSlide>
-//         ))}
-//       </Swiper>
-//     </div>
-//   );
-// };
-
-// export default TrendingArticles;
-
-
-
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -157,7 +19,7 @@ const TrendingArticles = () => {
       const res = await axiosSecure.get("/trending-articles");
       return res.data;
     },
-    staleTime: 60000, // Cache data for 1 minute
+    staleTime: 60000,
   });
 
   // Show loading state
@@ -173,7 +35,7 @@ const TrendingArticles = () => {
   const enableLoop = articles.length > 1;
 
   return (
-    <div className="trending-banner my-10">
+    <div className="trending-banner">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
@@ -191,7 +53,7 @@ const TrendingArticles = () => {
               style={{ backgroundImage: `url(${article.image})` }}
             >
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 rounded-lg flex flex-col justify-end p-6 text-white">
+              <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 flex flex-col justify-end p-6 text-white">
                 {/* Tags */}
                 <div className="absolute top-5 left-5 flex flex-wrap gap-2">
                   {article.tags.map((tag, index) => (

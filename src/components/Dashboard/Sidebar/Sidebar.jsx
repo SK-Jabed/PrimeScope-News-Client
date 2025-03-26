@@ -79,7 +79,7 @@ const Sidebar = () => {
           <MenuItem
             icon={FcSettings}
             label="Profile"
-            address="/dashboard/profile"
+            address="/profile"
           />
           <button
             onClick={logOut}

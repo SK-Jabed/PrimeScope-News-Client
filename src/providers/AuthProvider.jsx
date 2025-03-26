@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
-        console.log("CurrentUser-->", currentUser?.email);
+        console.log("CurrentUser-->", currentUser);
 
         if (currentUser) {
           // Get JWT token and Store on Local Storage

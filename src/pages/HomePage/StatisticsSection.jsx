@@ -38,7 +38,7 @@ const StatisticsSection = () => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
-  // GSAP Animation on Load
+  // GSAP Animation
   useEffect(() => {
     if (statsRef.current) {
       gsap.fromTo(
@@ -57,13 +57,13 @@ const StatisticsSection = () => {
   }, [statistics]);
 
   return (
-    <section className="my-16 py-12 bg-gray-100 text-white">
+    <section className="py-16 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
       {/* Section Header */}
       <div className="text-center mb-10 px-6" data-aos="fade-up">
         <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-500 via-violet-500 to-teal-500 text-transparent bg-clip-text">
           User Statistics Overview
         </h2>
-        <p className="text-lg text-gray-400 mt-3 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-gray-400 mt-3 max-w-2xl mx-auto">
           Get insights into our platform's growing community with real-time user
           statistics.
         </p>
@@ -74,38 +74,22 @@ const StatisticsSection = () => {
         ref={statsRef}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-12 mx-auto"
       >
-        {/* Total Users */}
-        <div
-          className="p-8 bg-gray-800 bg-opacity-10 rounded-xl shadow-lg border border-white border-opacity-20 transform transition duration-300 hover:scale-105"
-          data-aos="fade-up"
-        >
-          <h3 className="text-xl font-semibold text-violet-500">Total Users</h3>
-          <p className="text-5xl font-extrabold mt-4 text-teal-500">
-            <CountUp end={statistics.totalUsers} duration={5} />
-          </p>
-        </div>
-
-        {/* Normal Users */}
-        <div
-          className="p-8 bg-gray-800 bg-opacity-10 rounded-xl shadow-lg border border-white border-opacity-20 transform transition duration-300 hover:scale-105"
-          data-aos="fade-up"
-        >
-          <h3 className="text-xl font-semibold text-violet-500">Normal Users</h3>
-          <p className="text-5xl font-extrabold mt-4 text-blue-500">
-            <CountUp end={statistics.normalUsers} duration={5} />
-          </p>
-        </div>
-
-        {/* Premium Users */}
-        <div
-          className="p-8 bg-gray-800 bg-opacity-10 rounded-xl shadow-lg border border-white border-opacity-20 transform transition duration-300 hover:scale-105"
-          data-aos="fade-up"
-        >
-          <h3 className="text-xl font-semibold text-violet-500">Premium Users</h3>
-          <p className="text-5xl font-extrabold mt-4 text-sky-500">
-            <CountUp end={statistics.premiumUsers} duration={5} />
-          </p>
-        </div>
+        {[
+          { label: "Total Users", value: statistics.totalUsers, color: "text-teal-500" },
+          { label: "Normal Users", value: statistics.normalUsers, color: "text-blue-500" },
+          { label: "Premium Users", value: statistics.premiumUsers, color: "text-sky-500" },
+        ].map((stat, index) => (
+          <div
+            key={index}
+            className="p-8 bg-gray-200 dark:bg-gray-800 rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 transform transition duration-300 hover:scale-105"
+            data-aos="fade-up"
+          >
+            <h3 className="text-xl font-semibold text-violet-500">{stat.label}</h3>
+            <p className={`text-5xl font-extrabold mt-4 ${stat.color}`}>
+              <CountUp end={stat.value} duration={5} />
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
