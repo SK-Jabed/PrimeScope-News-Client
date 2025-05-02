@@ -65,35 +65,53 @@ const Navbar = () => {
             {/* Navigation Links */}
             <ul className="hidden lg:flex gap-6 font-semibold text-gray-700 dark:text-gray-300">
               <li>
-                <Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">
+                <Link
+                  to="/"
+                  className="hover:text-blue-600 dark:hover:text-blue-400"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/articles" className="hover:text-blue-600 dark:hover:text-blue-400">
+                <Link
+                  to="/articles"
+                  className="hover:text-blue-600 dark:hover:text-blue-400"
+                >
                   All Articles
                 </Link>
               </li>
               <li>
-                <Link to="/addArticle" className="hover:text-blue-600 dark:hover:text-blue-400">
+                <Link
+                  to="/addArticle"
+                  className="hover:text-blue-600 dark:hover:text-blue-400"
+                >
                   Add Articles
                 </Link>
               </li>
               <li>
-                <Link to="/subscription" className="hover:text-blue-600 dark:hover:text-blue-400">
+                <Link
+                  to="/subscription"
+                  className="hover:text-blue-600 dark:hover:text-blue-400"
+                >
                   Subscription
                 </Link>
               </li>
               {isAdmin && (
                 <li>
-                  <Link to="/dashboard" className="hover:text-blue-600 dark:hover:text-blue-400">
+                  <Link
+                    to="/dashboard"
+                    className="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
                     Dashboard
                   </Link>
                 </li>
               )}
               {userData?.isPremium && (
                 <li>
-                  <Link to="/premiumArticles" className="hover:text-blue-600 dark:hover:text-blue-400">
+                  <Link
+                    to="/premiumArticles"
+                    className="hover:text-blue-600 dark:hover:text-blue-400"
+                  >
                     Premium Articles
                   </Link>
                 </li>
@@ -128,7 +146,10 @@ const Navbar = () => {
                       className="w-10 h-10 rounded-full cursor-pointer"
                     />
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="dark:bg-gray-800 dark:border-gray-700">
+                  <DropdownMenuContent
+                    align="end"
+                    className="dark:bg-gray-800 dark:border-gray-700"
+                  >
                     <DropdownMenuItem asChild>
                       <Link to="/profile" className="dark:text-gray-300">
                         My Profile
@@ -139,7 +160,10 @@ const Navbar = () => {
                         My Articles
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={logOut} className="dark:text-red-400">
+                    <DropdownMenuItem
+                      onClick={logOut}
+                      className="dark:text-red-400"
+                    >
                       <MdOutlineLogout className="mr-2" /> Logout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -159,7 +183,9 @@ const Navbar = () => {
           } transition-transform duration-300 z-50`}
         >
           <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-300">PrimeScope News</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-300">
+              PrimeScope News
+            </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Your gateway to breaking news
             </p>
@@ -167,22 +193,34 @@ const Navbar = () => {
 
           <ul className="px-6 space-y-4 text-gray-900 dark:text-gray-300">
             <li>
-              <Link to="/" className="block text-lg hover:text-blue-600 dark:hover:text-blue-400">
+              <Link
+                to="/"
+                className="block text-lg hover:text-blue-600 dark:hover:text-blue-400"
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/articles" className="block text-lg hover:text-blue-600 dark:hover:text-blue-400">
+              <Link
+                to="/articles"
+                className="block text-lg hover:text-blue-600 dark:hover:text-blue-400"
+              >
                 All Articles
               </Link>
             </li>
             <li>
-              <Link to="/addArticle" className="block text-lg hover:text-blue-600 dark:hover:text-blue-400">
+              <Link
+                to="/addArticle"
+                className="block text-lg hover:text-blue-600 dark:hover:text-blue-400"
+              >
                 Add Articles
               </Link>
             </li>
             <li>
-              <Link to="/subscription" className="block text-lg hover:text-blue-600 dark:hover:text-blue-400">
+              <Link
+                to="/subscription"
+                className="block text-lg hover:text-blue-600 dark:hover:text-blue-400"
+              >
                 Subscription
               </Link>
             </li>
