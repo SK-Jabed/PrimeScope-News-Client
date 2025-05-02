@@ -12,7 +12,6 @@ const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
 
-  // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
@@ -60,9 +59,6 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
               {/*  Menu Items */}
-              {/* <CustomerMenu /> */}
-              {/* <SellerMenu /> */}
-
               <MenuItem
                 icon={BsGraphUp}
                 label="Statistics"

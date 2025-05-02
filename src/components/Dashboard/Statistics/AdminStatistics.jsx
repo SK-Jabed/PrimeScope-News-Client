@@ -6,7 +6,7 @@ const AdminStatistics = () => {
   return (
     <div>
       <div className="mt-12">
-        {/* small cards */}
+        {/* Small cards */}
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 flex-grow">
           {/* Sales Card */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -24,6 +24,7 @@ const AdminStatistics = () => {
               </h4>
             </div>
           </div>
+
           {/* Total Orders */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div
@@ -40,6 +41,7 @@ const AdminStatistics = () => {
               </h4>
             </div>
           </div>
+
           {/* Total Plants */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div
@@ -56,6 +58,7 @@ const AdminStatistics = () => {
               </h4>
             </div>
           </div>
+
           {/* Users Card */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div

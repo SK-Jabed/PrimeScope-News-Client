@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCheck, FaTrash, FaStar, FaTimes } from "react-icons/fa";
-import Swal from "sweetalert2";
 import moment from "moment";
+import Swal from "sweetalert2";
 import { axiosSecure } from "../../../hooks/useAxiosSecure";
 
 const AdminArticlesTable = ({ articles, refetch, onOpenDeclineModal }) => {
