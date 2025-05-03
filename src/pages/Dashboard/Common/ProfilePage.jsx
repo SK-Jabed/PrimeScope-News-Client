@@ -10,8 +10,6 @@
 
 // export default ProfilePage;
 
-
-
 // import React, { useState } from "react";
 // import { useContext } from "react";
 // import { AuthContext } from "../../../providers/AuthProvider";
@@ -110,8 +108,6 @@
 // };
 
 // export default ProfilePage;
-
-
 
 import React, { useState, useContext } from "react";
 import { Dialog } from "@headlessui/react";
