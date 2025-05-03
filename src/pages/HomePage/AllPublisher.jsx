@@ -23,7 +23,8 @@ const AllPublisher = () => {
           Our Trusted Publishers
         </h2>
         <p className="text-gray-700 dark:text-gray-300 mt-4 max-w-3xl mx-auto text-lg">
-          Meet our top-tier publishers who deliver high-quality content to our platform.
+          Meet our top-tier publishers who deliver high-quality content to our
+          platform.
         </p>
       </div>
 
@@ -31,9 +32,16 @@ const AllPublisher = () => {
       <div className="bg-gray-100 dark:bg-gray-800 py-12 shadow-xl">
         <Marquee gradient={false} speed={50} pauseOnHover>
           {publishers.map((publisher) => (
-            <div key={publisher._id} className="flex flex-col items-center justify-center mx-10">
+            <div
+              key={publisher._id}
+              className="flex flex-col items-center justify-center mx-10"
+            >
               <div className="w-28 h-28 rounded-full bg-white shadow-lg border-4 border-gray-300 dark:border-gray-700 flex items-center justify-center overflow-hidden">
-                <img src={publisher.logo} alt={publisher.name} className="w-24 h-24 object-contain rounded-full" />
+                <img
+                  src={publisher.logo}
+                  alt={publisher.name}
+                  className="w-24 h-24 object-contain rounded-full"
+                />
               </div>
               <p className="mt-3 text-lg font-semibold text-gray-900 dark:text-gray-200 tracking-wide">
                 {publisher.name}

@@ -18,27 +18,36 @@ const UniqueSections = () => {
       {/* Section 1: Spotlight on Readers */}
       <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6 text-gray-800 dark:text-white" data-aos="fade-up">
+          <h2
+            className="text-4xl font-bold mb-6 text-gray-800 dark:text-white"
+            data-aos="fade-up"
+          >
             Spotlight on Readers
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-12" data-aos="fade-up">
+          <p
+            className="text-lg text-gray-600 dark:text-gray-300 mb-12"
+            data-aos="fade-up"
+          >
             Discover what our readers are saying about the latest articles.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 name: "John Doe",
-                comment: "This article changed my perspective on the topic entirely!",
+                comment:
+                  "This article changed my perspective on the topic entirely!",
                 avatar: "https://i.ibb.co/QJTQxBQ/cr7.jpg",
               },
               {
                 name: "Jane Smith",
-                comment: "I’ve been following this website for months, and it’s amazing!",
+                comment:
+                  "I’ve been following this website for months, and it’s amazing!",
                 avatar: "https://i.ibb.co/k5Pqy6C/neymar-jr-pic.jpg",
               },
               {
                 name: "Sam Wilson",
-                comment: "Fantastic insights and great writing. Highly recommend!",
+                comment:
+                  "Fantastic insights and great writing. Highly recommend!",
                 avatar: "https://i.ibb.co/jMfKQV2/messi.jpg",
               },
             ].map((reader, idx) => (
@@ -53,8 +62,12 @@ const UniqueSections = () => {
                   alt={reader.name}
                   className="avatar w-16 h-16 mx-auto rounded-full border-4 border-indigo-500"
                 />
-                <h3 className="mt-4 text-lg font-bold dark:text-white">{reader.name}</h3>
-                <p className="mt-2 text-gray-600 dark:text-gray-300 italic">"{reader.comment}"</p>
+                <h3 className="mt-4 text-lg font-bold dark:text-white">
+                  {reader.name}
+                </h3>
+                <p className="mt-2 text-gray-600 dark:text-gray-300 italic">
+                  "{reader.comment}"
+                </p>
               </div>
             ))}
           </div>
@@ -95,8 +108,12 @@ const UniqueSections = () => {
                 data-aos-delay={200 * idx}
               >
                 <div className="text-6xl">{category.icon}</div>
-                <h3 className="mt-4 text-xl font-bold dark:text-white">{category.title}</h3>
-                <p className="mt-2 text-gray-700 dark:text-gray-300">{category.description}</p>
+                <h3 className="mt-4 text-xl font-bold dark:text-white">
+                  {category.title}
+                </h3>
+                <p className="mt-2 text-gray-700 dark:text-gray-300">
+                  {category.description}
+                </p>
                 <button className="mt-4 bg-indigo-500 dark:bg-indigo-700 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 dark:hover:bg-indigo-800 transition">
                   View Articles
                 </button>

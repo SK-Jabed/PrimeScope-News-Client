@@ -48,10 +48,7 @@ const Homepage = () => {
 
       <StatisticsSection></StatisticsSection>
 
-
       <PlansSection></PlansSection>
-
-      
 
       {/* Headless UI Modal */}
       <Dialog

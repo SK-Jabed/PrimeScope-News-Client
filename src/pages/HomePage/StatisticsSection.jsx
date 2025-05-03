@@ -75,16 +75,30 @@ const StatisticsSection = () => {
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-12 mx-auto"
       >
         {[
-          { label: "Total Users", value: statistics.totalUsers, color: "text-teal-500" },
-          { label: "Normal Users", value: statistics.normalUsers, color: "text-blue-500" },
-          { label: "Premium Users", value: statistics.premiumUsers, color: "text-sky-500" },
+          {
+            label: "Total Users",
+            value: statistics.totalUsers,
+            color: "text-teal-500",
+          },
+          {
+            label: "Normal Users",
+            value: statistics.normalUsers,
+            color: "text-blue-500",
+          },
+          {
+            label: "Premium Users",
+            value: statistics.premiumUsers,
+            color: "text-sky-500",
+          },
         ].map((stat, index) => (
           <div
             key={index}
             className="p-8 bg-gray-200 dark:bg-gray-800 rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 transform transition duration-300 hover:scale-105"
             data-aos="fade-up"
           >
-            <h3 className="text-xl font-semibold text-violet-500">{stat.label}</h3>
+            <h3 className="text-xl font-semibold text-violet-500">
+              {stat.label}
+            </h3>
             <p className={`text-5xl font-extrabold mt-4 ${stat.color}`}>
               <CountUp end={stat.value} duration={5} />
             </p>
