@@ -17,7 +17,9 @@ const PaymentPage = () => {
         <h2 className="text-xl font-bold text-center dark:text-white">
           Your Card Information
         </h2>
-        <p className="text-center mt-2 dark:text-gray-300">Plan: {plan.title}</p>
+        <p className="text-center mt-2 dark:text-gray-300">
+          Plan: {plan.title}
+        </p>
 
         <Elements stripe={stripePromise}>
           <PaymentForm plan={plan} />
