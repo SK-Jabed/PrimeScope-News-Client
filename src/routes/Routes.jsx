@@ -160,10 +160,6 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: "manage-orders",
-      //   element: <ManageOrders />,
-      // },
     ],
   },
 ]);

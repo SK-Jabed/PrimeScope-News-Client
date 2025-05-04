@@ -227,4 +227,3 @@ const MyArticlesPage = () => {
 };
 
 export default MyArticlesPage;
-
