@@ -18,6 +18,7 @@ const TrendingCategories = () => {
       <p className="text-lg text-gray-600 dark:text-gray-400 mb-10">
         Explore the most discussed topics today
       </p>
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
         {categories.map((category, index) => (
           <motion.div

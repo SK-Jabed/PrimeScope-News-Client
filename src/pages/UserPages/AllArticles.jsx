@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { gsap } from "gsap";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
 import usePublishers from "../../hooks/usePublishers";
 import useUserData from "../../hooks/useUserData";
 import Container from "../../components/Shared/Container";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import useAuth from "../../hooks/useAuth";
+import { gsap } from "gsap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const tags = ["Health", "Science", "Technology"];
 
@@ -43,9 +43,13 @@ const AllArticlesPage = () => {
       let sortedArticles = [...data.articles];
 
       if (sortOrder === "newest") {
-        sortedArticles.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
+        sortedArticles.sort(
+          (a, b) => new Date(b.postedDate) - new Date(a.postedDate)
+        );
       } else {
-        sortedArticles.sort((a, b) => new Date(a.postedDate) - new Date(b.postedDate));
+        sortedArticles.sort(
+          (a, b) => new Date(a.postedDate) - new Date(b.postedDate)
+        );
       }
 
       setArticles(sortedArticles);
